@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <title>自助服务</title>
+    <style>
+      .app-loading-box {
+        width: 60px;
+        height: 40px;
+        padding-top: 20%;
+        margin: 0 auto;
+      }
+      .app-loading-box span {
+        display: inline-block;
+        width: 8px;
+        height: 100%;
+        border-radius: 4px;
+        background: #0073e8;
+        -webkit-animation: app-loading-box 1s ease infinite;
+        animation: app-loading-box 1s ease infinite;
+      }
+      @-webkit-keyframes app-loading-box {
+        0%,100%{
+          height: 40px;
+          background: #0073e8;
+        }
+        50%{
+          height: 70px;
+          margin: -15px 0;
+          background: #a3ddff;
+        }
+      }
+      @keyframes app-loading-box {
+        0%,100%{
+          height: 40px;
+          background: #0073e8;
+        }
+        50%{
+          height: 70px;
+          margin: -15px 0;
+          background: #a3ddff;
+        }
+      }
+      .app-loading-box span:nth-child(2) {
+        -webkit-animation-delay:0.2s;
+        animation-delay:0.2s;
+      }
+      .app-loading-box span:nth-child(3) {
+        -webkit-animation-delay:0.4s;
+        animation-delay:0.4s;
+      }
+      .app-loading-box span:nth-child(4) {
+        -webkit-animation-delay:0.6s;
+        animation-delay:0.6s;
+      }
+      .app-loading-box span:nth-child(5) {
+        -webkit-animation-delay:0.8s;
+        animation-delay:0.8s;
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>
+      <strong>We're sorry but template3 doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app">
+      <div class="app-loading-box">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+    <!-- built files will be auto injected -->
+  </body>
+</html>

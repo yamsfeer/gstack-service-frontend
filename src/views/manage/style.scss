@@ -1,0 +1,16 @@
+@import "../../components/style/var";
+
+.manage-page {
+  background: #fff;
+  .page-main {
+    padding: 16px;
+    .tool-box {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .width-300 {
+      width: 300px;
+    }
+  }
+}

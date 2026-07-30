@@ -1,0 +1,36 @@
+.gs-transfer {
+  &-helper {
+    background-color: #cef;
+    z-index: 9999999999999999;
+
+    .gs-transfer-panel-item {
+      display: flex;
+      align-items: center;
+      line-height: 32px;
+    }
+
+    .gs-checkbox {
+      vertical-align: middle;
+    }
+  }
+
+  /* 扩大slicksort的handler的可点击范围 */
+  &-panel-item.is-sortable {
+    display: flex;
+    .gs-transfer-panel-item-text {
+      width: 100%;
+    }
+  }
+
+  &-panel-body {
+    .gs-checkbox {
+      line-height: 32px;
+    }
+  }
+  &-actions {
+    .gs-button + .gs-button {
+      margin: 0;
+      margin-top: 4px;
+    }
+  }
+}

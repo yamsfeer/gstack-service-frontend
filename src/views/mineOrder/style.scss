@@ -1,0 +1,55 @@
+@import "../../components/style/var";
+
+.mine-order-page {
+  background: #fff;
+  .page-header {
+    display: flex;
+    .page-header-left {
+      width: 180px;
+    }
+    .page-header-right {
+      width: calc(100% - 180px);
+      & > span {
+        display: inline-block;
+        width: 80px;
+        font-weight: 400;
+        color: #999;
+        cursor: pointer;
+        &.active, &:hover {
+          font-weight: 600;
+          color: #666;
+        }
+      }
+    }
+  }
+  .page-main {
+    display: flex;
+    .page-main-left {
+      width: 180px;
+      padding: 16px;
+      li {
+        margin-bottom: 8px;
+        color: #888;
+        cursor: pointer;
+        font-size: 12px;
+        &.active, &:hover {
+          color: #2794f5;
+        }
+      }
+    }
+    .page-main-right {
+      width: calc(100% - 180px);
+      padding: 16px;
+      padding-top: 0px;
+      border-left: 1px solid #eee;
+      .width-350 {
+        width: 350px;
+      }
+    }
+  }
+  .tool-box {
+    margin-top: 16px;
+    margin-bottom: 16px;
+    text-align: right;
+  }
+}

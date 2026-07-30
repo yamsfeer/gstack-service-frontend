@@ -1,0 +1,37 @@
+@import "../../components/style/var";
+
+.apply-overview-page {
+  background-color: #fff;
+  .page-main {
+    padding: 16px;
+  }
+  .order-item {
+    margin-bottom: 20px;
+    .type-title {
+      font-size: 14px;
+      margin-bottom: 8px;
+      font-weight: 600;
+      i {
+        font-size: 20px;
+        margin-right: 8px;
+      }
+    }
+    .item {
+      border: 1px solid #eee;
+      border-radius: 3px;
+      padding: 10px;
+      margin-bottom: 16px;
+      .item-title {
+        color: #333;
+        font-weight: 600;
+      }
+      .item-desc {
+        color: #888;
+        margin-bottom: 8px;
+      }
+      &:hover {
+        box-shadow: 1px 1px 5px #888888;
+      }
+    }
+  }
+}

@@ -1,0 +1,141 @@
+.apply-form-page {
+  background: #fff;
+  .main {
+    padding: 16px;
+    .footer {
+      margin-left: 140px;
+    }
+    .width-150 {
+      width: 150px;
+    }
+    .width-200 {
+      width: 200px;
+    }
+    .width-300 {
+      width: 300px;
+    }
+    .width-425 {
+      width: 425px;
+    }
+    .width-874 {
+      width: 874px;
+    }
+    .width-626 {
+      width: 626px;
+    }
+    .width-350 {
+      width: 350px;
+    }
+    .margin-left-16 {
+      margin-left: 16px;
+    }
+    .margin-bottom-16 {
+      margin-bottom: 16px;
+    }
+    .tip {
+      display: block;
+      color: #888;
+    }
+    .warning-tip {
+      display: block;
+      color: #f7ad2c;
+    }
+  }
+  &-vm {
+    .cpu-memory-box {
+      border: 1px solid #eee;
+      width: 874px;
+      & > div:first-child {
+        padding: 0px 8px;
+        background: #eee;
+      }
+      & > div:last-child {
+        padding: 16px;
+        .margin-left-24 {
+          margin-left: 24px;
+        }
+      }
+    }
+  }
+  &-lvs, &-dns {
+    .tip-box {
+      background-color: #e1f9ff;
+      padding: 8px 24px;
+      border-radius: 4px;
+      border: 1px solid #b0fbff;
+      margin-top: 16px;
+      i {
+        font-size: 18px;
+        &.success {
+          color: #66cc00;
+        }
+        &.danger {
+          color: #ff3300;
+        }
+        &.primary {
+          color: #1f8def;
+        }
+      }
+    }
+    .no-append-padding {
+      .gs-input-group-append {
+        padding: 0px;
+      }
+    }
+    .gs-tag + .gs-tag {
+      margin-left: 8px;
+    }
+  }
+  &-lvs {
+    .check-port-list {
+      padding-left: 16px;
+
+      .server-ip {
+        margin-right: 10px;
+      }
+
+      .server-port {
+        margin-right: 10px;
+        cursor: default;
+
+        i {
+          margin-left: 2px;
+        }
+      }
+    }
+  }
+  &-dns {
+    .ip-box {
+      .dot {
+        display: inline-block;
+        width: 10px;
+        font-weight: 600;
+        color: #000;
+      }
+      .gs-select-wrap {
+        border: 0px;
+        border-left: 1px solid #d9d9d9;
+        border-radius: 0px;
+      }
+      .gs-cascader-select {
+        border-left: 1px solid #d9d9d9;
+        .gs-input {
+          border: 0px;
+        }
+      }
+    }
+    .tip-box {
+      margin-top: 0px;
+    }
+    .gs-tag + .gs-tag {
+      margin-left: 8px;
+    }
+  }
+  .word-limit {
+    position: relative !important;
+    right: 0px !important;
+  }
+  .gs-input.gs-input-group.is-append.gs-input-validate.not-error {
+    border-color: #d9d9d9;
+  }
+}

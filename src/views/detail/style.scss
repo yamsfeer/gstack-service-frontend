@@ -1,0 +1,35 @@
+@import "../../components/style/var";
+
+.detail-page {
+  background-color: #fff;
+  display: flex;
+  .step {
+    padding: 30px 0px;
+  }
+  .components {
+    padding: 0px 24px 16px;
+  }
+  .page-left {
+    width: calc(100% - 300px);
+    border-right: 1px solid #eee;
+  }
+  .page-right {
+    width: 300px;
+  }
+  .entry-tip {
+    padding: 8px 16px;
+    border-radius: 3px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 16px 16px;
+    background: #fdf6ec;
+
+    &-text {
+      color: #e6a23c;
+    }
+    &-text i {
+      margin-right: 10px;
+    }
+  }
+}
