@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="/favicon.ico">
+    <title>自助服务</title>
+    <style>
+      .app-loading-box {
+        width: 60px;
+        height: 40px;
+        padding-top: 20%;
+        margin: 0 auto;
+      }
+      .app-loading-box span {
+        display: inline-block;
+        width: 8px;
+        height: 100%;
+        border-radius: 4px;
+        background: #0073e8;
+        animation: app-loading-box 1s ease infinite;
+      }
+      @keyframes app-loading-box {
+        0%,100%{
+          height: 40px;
+          background: #0073e8;
+        }
+        50%{
+          height: 70px;
+          margin: -15px 0;
+          background: #a3ddff;
+        }
+      }
+      .app-loading-box span:nth-child(2) {
+        animation-delay:0.2s;
+      }
+      .app-loading-box span:nth-child(3) {
+        animation-delay:0.4s;
+      }
+      .app-loading-box span:nth-child(4) {
+        animation-delay:0.6s;
+      }
+      .app-loading-box span:nth-child(5) {
+        animation-delay:0.8s;
+      }
+    </style>
+  </head>
+  <body>
+    <noscript>
+      <strong>We're sorry but this app doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app">
+      <div class="app-loading-box">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

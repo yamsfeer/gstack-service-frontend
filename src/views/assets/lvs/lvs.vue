@@ -41,9 +41,8 @@
         @sizeChange="sizeChange"
         @sortChange="sortChange"
       >
-        <template v-for="(item, index) in renderCol">
+        <template v-for="(item, index) in renderCol" :key="index">
           <gs-table-column
-            :key="index"
             :label="item.label"
             :prop="item.value"
             :min-width="item.width"
@@ -119,7 +118,7 @@ import {
 } from '@/mixins';
 import { cloneDeep } from 'lodash';
 import { arr2map, lvsStatusMap } from '@/views/assets/constant';
-import { lvsColumns } from '@/views/assets/modules/columns';
+import { lvsColumns } from '@/views/assets/modules/columns.js';
 import { isEmptyArr, loading, debounce } from '@/utils/utils';
 import {
   getAssetsLvsOption,
@@ -127,7 +126,7 @@ import {
   deleteLvs,
   batchServer,
 } from '@/service/asset';
-import ClusterMembers from '@/views/assets/modules/cluster-members';
+import ClusterMembers from '@/views/assets/modules/cluster-members.vue';
 
 const LOCAL_STORAGE_KEY = 'ASSETS_LVS_COL_CONFIG';
 const tableCols = lvsColumns;
@@ -185,7 +184,7 @@ export default {
   filters: {
     arr2str(arr = '') {
       try {
-        return JSON.parse(arr).join('，\n');
+        return JSON.parse(arr).join('，');
       } catch (error) {
         return arr;
       }
@@ -236,7 +235,6 @@ export default {
       this.clusterVisible = true;
       this.clusterData = await this.batchServer(serverList);
     },
-    @loading()
     async getTableList() {
       const res = await getAssetsLvs(this.getParams());
       if (res.error_code !== 0) {
@@ -247,7 +245,6 @@ export default {
       this.tableData = res.data.lvss;
       this.total = res.data.total;
     },
-    @loading('loadingCluster')
     async batchServer(serverList) {
       const params = {
         assetServerUuidList: serverList
@@ -258,7 +255,6 @@ export default {
       }
       return res.data.servers;
     },
-    @loading('loadingOpt')
     async getOption() {
       const res = await getAssetsLvsOption();
       if (res.error_code !== 0) return;

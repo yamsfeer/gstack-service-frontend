@@ -37,9 +37,8 @@
         @sizeChange="sizeChange"
         @sortChange="sortChange"
       >
-        <template v-for="(item, index) in renderCol">
+        <template v-for="(item, index) in renderCol" :key="index">
           <gs-table-column
-            :key="index"
             :label="item.label"
             :prop="item.value"
             :min-width="item.width"
@@ -86,7 +85,7 @@ import {
 } from '@/mixins';
 import { cloneDeep } from 'lodash';
 import { arr2map } from '@/views/assets/constant';
-import { netmapColumns } from '@/views/assets/modules/columns';
+import { netmapColumns } from '@/views/assets/modules/columns.js';
 import { isEmptyArr, loading, debounce } from '@/utils/utils';
 import { getAssetsNetMapOption, getAssetsNetMap } from '@/service/asset';
 
@@ -136,7 +135,7 @@ export default {
   filters: {
     arr2str(arr = '') {
       try {
-        return JSON.parse(arr).join('，\n');
+        return JSON.parse(arr).join('，');
       } catch (error) {
         return arr;
       }
@@ -173,7 +172,6 @@ export default {
       }
       return params;
     },
-    @loading()
     async getTableList() {
       const res = await getAssetsNetMap(this.getParams());
       if (res.error_code !== 0) {
@@ -184,7 +182,6 @@ export default {
       this.tableData = res.data.net_mappings;
       this.total = res.data.total;
     },
-    @loading('loadingOpt')
     async getOption() {
       const res = await getAssetsNetMapOption();
       if (res.error_code !== 0) return;

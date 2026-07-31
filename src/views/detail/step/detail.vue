@@ -76,7 +76,7 @@
 import primaryRound from '@/assets/icon-round-primary.png';
 import { serviceType } from './constant';
 import { stateTextMap } from '@/views/apply/constant';
-import { mapActions } from 'vuex';
+import { mapActions } from '@/stores/vuex-compat';
 import moment from 'moment';
 import './style.scss';
 

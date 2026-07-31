@@ -234,7 +234,7 @@ export default {
       if (JSON.stringify(val) === '{}') return;
       this.formatApiData();
       if (this.type === 'cluster') {
-        this.$set(this.option, 'subNets', [val.subNet]);
+        this.option['subNets'] = [val.subNet];
         getSubnetByIdc({ idcList: [val.idc] }).then(res => {
           this.option.subNets = (res.data.statistics || []).map(item => item.sub_net);
         });
@@ -257,7 +257,7 @@ export default {
       handler(newVal) {
         if (!newVal || this.type !== 'cluster') return;
         getSubnetByIdc({ idcList: [newVal] }).then(res => {
-          this.$set(this.option, 'subNets', (res.data.statistics || []).map(item => item.sub_net));
+          this.option['subNets'] = (res.data.statistics || [].map(item => item.sub_net));
           const isFind = this.option.subNets.find(item => item === this.form.subNet);
           if (!isFind) this.form.subNet = '';
         });
@@ -425,11 +425,11 @@ export default {
     updateData({ key, newData }) {
       // 集群特殊处理
       if (key === 'assetLbGroup') {
-        this.$set(this.form, 'assetLbGroup', newData.groupName);
-        this.$set(this.form, 'directorMasterUuid', newData.logicalIp);
-        this.$set(this.form, 'LbGroup', newData);
+        this.form['assetLbGroup'] = newData.groupName;
+        this.form['directorMasterUuid'] = newData.logicalIp;
+        this.form['LbGroup'] = newData;
       } else {
-        this.$set(this.form, key, newData);
+        this.form[key] = newData;
       }
     },
     delData(key, index) {
@@ -477,7 +477,7 @@ export default {
         this.form.logicalIpList.forEach((item, indx) => {
           if (index !== indx) {
             item.is_admin_ip = false;
-            this.$set(this.form.logicalIpList, indx, item);
+            this.form.logicalIpList[indx] = item;
           }
         });
       }

@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters } from '@/stores/vuex-compat';
 import './style.scss';
 import vm from './vm.vue';
 import lvs from './lvs.vue';

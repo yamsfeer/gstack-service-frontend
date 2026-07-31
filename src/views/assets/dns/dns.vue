@@ -51,9 +51,8 @@
         @sizeChange="sizeChange"
         @sortChange="sortChange"
       >
-        <template v-for="(item, index) in renderCol">
+        <template v-for="(item, index) in renderCol" :key="index">
           <gs-table-column
-            :key="index"
             :label="item.label"
             :prop="item.value"
             :min-width="item.width"
@@ -142,10 +141,10 @@ import {
 } from '@/mixins';
 import { cloneDeep } from 'lodash';
 import { arr2map, dnsStatusMap, dnsStatusListMap, dnsStatusLabelMap } from '@/views/assets/constant';
-import { dnsColumns } from '@/views/assets/modules/columns';
+import { dnsColumns } from '@/views/assets/modules/columns.js';
 import { isEmptyArr, loading, debounce } from '@/utils/utils';
 import { getAssetsDnsOption, getAssetsDns, updateAssetsDns, deleteAssetsDns, fetchTaskMessage, retryUpdateAssetsDns } from '@/service/asset';
-import EditDns from '@/views/assets/dns/editDns/editDns';
+import EditDns from '@/views/assets/dns/editDns/editDns.vue';
 
 const LOCAL_STORAGE_KEY = 'ASSETS_DNS_COL_CONFIG';
 const tableCols = dnsColumns;
@@ -211,7 +210,7 @@ export default {
   filters: {
     arr2str(arr = '') {
       try {
-        return JSON.parse(arr).join('，\n');
+        return JSON.parse(arr).join('，');
       } catch (error) {
         return arr;
       }
@@ -283,7 +282,6 @@ export default {
       }
       this.fetchTable();
     },
-    @loading()
     async getTableList() {
       const res = await getAssetsDns(this.getParams());
       if (res.error_code !== 0) {
@@ -294,7 +292,6 @@ export default {
       this.tableData = res.data.dnss;
       this.total = res.data.total;
     },
-    @loading('loadingOpt')
     async getOption() {
       const res = await getAssetsDnsOption();
       if (res.error_code !== 0) return;

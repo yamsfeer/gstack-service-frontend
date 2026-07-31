@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions } from '@/stores/vuex-compat';
 import './style.scss';
 import FixedStepItem from '../processStep/fixedStepItem.vue';
 import StepItem from '../processStep/stepItem.vue';
@@ -181,7 +181,7 @@ export default {
         this.openStep = { ...data };
         this.$refs.processForm.validateField('steps');
       } else {
-        this.$set(this.processForm.steps, data.index, data);
+        this.processForm.steps[data.index] = data;
       }
     },
     resetForm() {

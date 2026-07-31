@@ -31,13 +31,13 @@
 <script>
 import {
   mapActions
-} from 'vuex';
+} from '@/stores/vuex-compat';
 import './style.scss';
 import { keyMap } from './constant';
 import { rules } from './formRules';
-import detailLayout from '@/views/assets/modules/detailLayout';
-import ip from '@/views/assets/modules/selectIp';
-import server from '@/views/apply/applyForm/server/selectServer';
+import detailLayout from '@/views/assets/modules/detailLayout.vue';
+import ip from '@/views/assets/modules/selectIp.vue';
+import server from '@/views/apply/applyForm/server/selectServer.vue';
 import { getAssetsClusterOption } from '@/service/asset';
 
 export default {

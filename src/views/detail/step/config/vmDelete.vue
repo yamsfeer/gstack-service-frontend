@@ -65,11 +65,11 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions } from '@/stores/vuex-compat';
 import primaryRound from '@/assets/icon-round-primary.png';
 import '../style.scss';
-import dns from './chose/dns';
-import logModal from './log-modal';
+import dns from './chose/dns.vue';
+import logModal from './log-modal.vue';
 import { taskClassMap } from '../constant';
 import { debounce } from '@/utils/utils';
 const statusText = {
@@ -142,7 +142,7 @@ export default {
     },
     confirmSelect({ selected, type }) {
       this.configData[this.currentChooseIndex][type] = JSON.parse(JSON.stringify(selected));
-      this.$set(this.configData, this.currentChooseIndex, this.configData[this.currentChooseIndex]);
+      this.configData[this.currentChooseIndex] = this.configData[this.currentChooseIndex];
       this[`${type}Visible`] = false;
     },
     handleSubmit(isImmediate) {

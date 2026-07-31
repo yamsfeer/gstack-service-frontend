@@ -1,4 +1,5 @@
 export function arr2map(arr) {
+  if (!arr || !Array.isArray(arr)) return [];
   return arr.map(item => ({
     label: item,
     value: item,

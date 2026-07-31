@@ -87,7 +87,7 @@
   </gs-modal>
 </template>
 <script>
-import { mapActions } from 'vuex';
+import { mapActions } from '@/stores/vuex-compat';
 import { conditionKeyMap } from '@/views/detail/step/constant';
 
 export default {

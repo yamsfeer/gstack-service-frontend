@@ -72,9 +72,8 @@
         @sizeChange="sizeChange"
         @sortChange="sortChange"
       >
-        <template v-for="(item, index) in renderCol">
+        <template v-for="(item, index) in renderCol" :key="index">
           <gs-table-column
-            :key="index"
             :label="item.label"
             :prop="item.value"
             :min-width="item.width"
@@ -123,7 +122,7 @@ import {
   restoreMixin,
 } from '@/mixins';
 import { cloneDeep } from 'lodash';
-import { serverColumns } from '@/views/assets/modules/columns';
+import { serverColumns } from '@/views/assets/modules/columns.js';
 import { getAssetsServer, getAssetsServerOption } from '@/service/asset';
 import {
   arr2map,
@@ -132,7 +131,7 @@ import {
   assetsOwnerMap,
 } from '@/views/assets/constant';
 import { isEmptyArr, loading, debounce } from '@/utils/utils';
-import { mapGetters } from 'vuex';
+import { mapGetters } from '@/stores/vuex-compat';
 
 const LOCAL_STORAGE_KEY = 'ASSETS_SERVER_COL_CONFIG';
 const tableCols = serverColumns;
@@ -239,7 +238,6 @@ export default {
       }
       return params;
     },
-    @loading()
     async getTableList() {
       const res = await getAssetsServer(this.getParams());
       if (res.error_code !== 0) {
@@ -250,7 +248,6 @@ export default {
       this.tableData = res.data.servers;
       this.total = res.data.total;
     },
-    @loading('loadingOpt')
     async getOption() {
       const res = await getAssetsServerOption();
       if (res.error_code !== 0) return;

@@ -5,8 +5,8 @@
       :data="leftList"
       v-model="leftChecked"
       :filterable="filterable"
-      :filter-placeholder="filterPlaceholder || gsi18n('gs.transfer.placeholder')"
-      :no-data-text="noDataText || gsi18n('gs.transfer.noDataText')"
+      :filter-placeholder="filterPlaceholder || '请输入搜索内容'"
+      :no-data-text="noDataText || '暂无数据'"
     />
     <div class="gs-transfer-actions">
       <gs-button
@@ -42,8 +42,8 @@
       :data="rightList"
       v-model="rightChecked"
       :filterable="filterable"
-      :filter-placeholder="filterPlaceholder || gsi18n('gs.transfer.placeholder')"
-      :no-data-text="noDataText || gsi18n('gs.transfer.noDataText')"
+      :filter-placeholder="filterPlaceholder || '请输入搜索内容'"
+      :no-data-text="noDataText || '暂无数据'"
       :sortable="sortable"
       :text-to-chcked="textToChcked"
       @sort="handleSort"
@@ -52,16 +52,14 @@
 </template>
 
 <script>
-import emitter from '@gs-ui/gs-ui/lib/_utils/mixins/emitter';
-import locale from '@gs-ui/gs-ui/lib/_utils/mixins/i18n';
-import Panel from './panel';
+import Panel from './panel.vue';
 
 export default {
   name: 'Transfer',
   components: {
     Panel,
   },
-  mixins: [emitter, locale],
+  // emitter and locale mixins removed (not available in Element Plus)
   props: {
     value: {
       type: Array,
@@ -136,9 +134,7 @@ export default {
       return this.targetKeys.some((item, index) => this.valueCopy[index] !== item);
     },
     titleList() {
-      const { gsi18n } = this;
-
-      return this.titles || [gsi18n('gs.transfer.leftTitle'), gsi18n('gs.transfer.rightTitle')];
+      return this.titles || ['待选列表', '已选列表'];
     },
     sources() {
       let list = this.data;

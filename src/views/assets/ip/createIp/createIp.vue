@@ -18,9 +18,8 @@
     >
       <gs-form-item label="所在机房：" prop="idc">
         <gs-select v-model="form.idc" placeholder="">
-          <template v-for="idc in idcs">
+          <template v-for="idc in idcs" :key="idc">
             <gs-option
-              :key="idc.value"
               :label="idc.label"
               :value="idc.value"
             />
@@ -29,9 +28,8 @@
       </gs-form-item>
       <gs-form-item label="IP类型：" prop="type">
         <gs-select v-model="form.type" placeholder="">
-          <template v-for="type in ipTypes">
+          <template v-for="type in ipTypes" :key="type">
             <gs-option
-              :key="type.value"
               :label="type.label"
               :value="type.value"
             />

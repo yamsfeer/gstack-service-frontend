@@ -39,9 +39,8 @@
         @sizeChange="sizeChange"
         @sortChange="sortChange"
       >
-        <template v-for="(item, index) in renderCol">
+        <template v-for="(item, index) in renderCol" :key="index">
           <gs-table-column
-            :key="index"
             :label="item.label"
             :prop="item.value"
             :min-width="item.width"
@@ -96,7 +95,7 @@ import {
 } from '@/mixins';
 import { cloneDeep } from 'lodash';
 import { arr2map } from '@/views/assets/constant';
-import { ipColumns } from '@/views/assets/modules/columns';
+import { ipColumns } from '@/views/assets/modules/columns.js';
 import { isEmptyArr, loading, debounce } from '@/utils/utils';
 import {
   getAssetsIpOption,
@@ -104,7 +103,7 @@ import {
   createAssetsIpBatch,
   updateAssetsIp,
 } from '@/service/asset';
-import CreateIp from '@/views/assets/ip/createIp/createIp';
+import CreateIp from '@/views/assets/ip/createIp/createIp.vue';
 
 const LOCAL_STORAGE_KEY = 'ASSETS_IP_COL_CONFIG';
 const tableCols = ipColumns;
@@ -173,7 +172,6 @@ export default {
       }
       return params;
     },
-    @loading()
     async getTableList() {
       const res = await getAssetsIp(this.getParams());
       if (res.error_code !== 0) {
@@ -184,7 +182,6 @@ export default {
       this.tableData = res.data.ips;
       this.total = res.data.total;
     },
-    @loading('loadingOpt')
     async getOption() {
       const res = await getAssetsIpOption();
       if (res.error_code !== 0) return;
@@ -217,7 +214,6 @@ export default {
     handleCreateIp() {
       this.createVisible = true;
     },
-    @loading('loadingCreate')
     async createIp(params) {
       const res = await createAssetsIpBatch(params);
       if (res.error_code !== 0) {

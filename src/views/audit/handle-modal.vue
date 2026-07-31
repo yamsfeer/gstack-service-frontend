@@ -29,7 +29,7 @@
 <script>
 import {
   mapActions
-} from 'vuex';
+} from '@/stores/vuex-compat';
 import { debounce } from '@/utils/utils';
 export default {
   props: {

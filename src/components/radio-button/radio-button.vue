@@ -13,9 +13,8 @@
         :class="{ 'active': isSelectAll }"
         @click="clear"
       >全部</span>
-      <template v-for="(item, index) in data">
+      <template v-for="(item, index) in data" :key="index">
         <span
-          :key="index"
           class="radio-button-item"
           :class="{ 'active': active.includes(item.value || item) }"
           @click="handleClick(item, index)"

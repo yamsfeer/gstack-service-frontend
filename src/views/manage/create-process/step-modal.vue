@@ -39,11 +39,11 @@
 import {
   mapState,
   mapActions
-} from 'vuex';
+} from '@/stores/vuex-compat';
 import {
   checkLoading,
   checkSuccess
-} from '@/store/status';
+} from '@/stores/vuex-compat';
 import rulesMix from './formRules';
 export default {
   mixins: [rulesMix],

@@ -35,14 +35,14 @@
 <script>
 import {
   mapActions
-} from 'vuex';
+} from '@/stores/vuex-compat';
 import './style.scss';
 import { keyMap } from './constant';
 import { rules } from './formRules';
-import detailLayout from '@/views/assets/modules/detailLayout';
-import server from '@/views/apply/applyForm/server/selectServer';
-import lbgroup from '@/views/detail/step/config/chose/lbgroup';
-import ip from '@/views/assets/modules/selectIp';
+import detailLayout from '@/views/assets/modules/detailLayout.vue';
+import server from '@/views/apply/applyForm/server/selectServer.vue';
+import lbgroup from '@/views/detail/step/config/chose/lbgroup.vue';
+import ip from '@/views/assets/modules/selectIp.vue';
 import { getAssetsLvsOption, getSubnetByIdc } from '@/service/asset';
 
 export default {
@@ -261,7 +261,7 @@ export default {
     },
     getAssetsOption() {
       getSubnetByIdc().then(res => {
-        this.$set(this.option, 'subNets', (res.data.statistics || []).map(item => item.sub_net));
+        this.option['subNets'] = (res.data.statistics || [].map(item => item.sub_net));
       });
       getAssetsLvsOption().then(res => {
         if (res.error_code !== 0) return;

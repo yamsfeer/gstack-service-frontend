@@ -3,7 +3,7 @@ import {
   LOADING,
   SUCCESS,
   FAIL
-} from '@/store/status';
+} from '@/stores/vuex-compat';
 import * as userService from '@/service/user';
 
 const {

@@ -51,7 +51,7 @@
 <script>
 import {
   mapActions
-} from 'vuex';
+} from '@/stores/vuex-compat';
 export default {
   props: {
     visible: {

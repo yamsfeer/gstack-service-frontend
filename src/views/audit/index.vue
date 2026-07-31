@@ -95,14 +95,14 @@ import {
   mapState,
   mapActions,
   mapGetters
-} from 'vuex';
+} from '@/stores/vuex-compat';
 import {
   checkLoading,
   checkSuccess
-} from '@/store/status';
+} from '@/stores/vuex-compat';
 import './style.scss';
 import { serviceOptions, OrderState, stateTextMap } from '@/views/apply/constant';
-import HandleModal from './handle-modal';
+import HandleModal from './handle-modal.vue';
 export default {
   components: {
     HandleModal

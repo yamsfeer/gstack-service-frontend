@@ -69,7 +69,7 @@ import {
   SlickList,
   SlickItem,
 } from 'vue-slicksort';
-import DraggerItem from './dragger-item';
+import DraggerItem from './dragger-item.vue';
 import './style.scss';
 
 export default {

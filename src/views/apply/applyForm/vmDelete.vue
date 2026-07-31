@@ -57,10 +57,10 @@
 import './style.scss';
 import { vmDeleteConfig } from './constant';
 import { rules_vmDelete } from './formRules';
-import selectServer from './server/selectServer';
-import selectedServer from './server/selectedServer';
+import selectServer from './server/selectServer.vue';
+import selectedServer from './server/selectedServer.vue';
 import { assignArr } from '@/utils/utils';
-import { mapGetters } from 'vuex';
+import { mapGetters } from '@/stores/vuex-compat';
 
 export default {
   name: 'vmDelete',

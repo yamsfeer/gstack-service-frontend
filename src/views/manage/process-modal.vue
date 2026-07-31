@@ -42,7 +42,7 @@
 import {
   mapState,
   mapActions
-} from 'vuex';
+} from '@/stores/vuex-compat';
 import StepItem from './processStep/stepItem.vue';
 import StepList from './processStep/stepList.vue';
 export default {

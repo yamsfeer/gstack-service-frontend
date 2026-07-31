@@ -1,3 +1,3 @@
-import BasicHeader from './basic-header';
+import BasicHeader from './basic-header.vue';
 
 export default BasicHeader;

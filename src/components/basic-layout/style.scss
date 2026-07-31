@@ -1,45 +1,26 @@
-@import "../style/var";
-
 html,
 body {
   height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .app {
   &-header {
     z-index: 2;
-
-    .gs-special-nav {
-      li {
-        width: auto !important;
-        margin-right: $gap-size-md;
-      }
-    }
-
-    .user-info-dropdown {
-      padding-left: 0;
-      font-size: 14px;
-      color: #fff;
-      vertical-align: bottom;
-
-      &:hover {
-        color: #fff;
-      }
-
-      .gs-icon-down {
-        font-size: 14px !important;
-      }
-    }
+    padding: 0;
   }
 
   &-container {
+    height: 100vh;
     &.is-fixed {
-      .gs-layout-header {
+      .el-header {
         z-index: 2;
       }
     }
   }
 }
+
 .app-content {
   .page-header {
     padding: 16px;
@@ -98,39 +79,6 @@ body {
   }
 }
 
-.bordered-table {
-  .gs-table td, .gs-table th {
-    border: 1px solid #d9d9d9;
-  }
-  .gs-table-body, .gs-table-footer, .gs-table-header {
-    border-collapse: collapse;
-  }
-  .gs-table th {
-    height: 32px;
-    & > .cell {
-      line-height: 32px;
-    }
-  }
-  .gs-table-footer-wrapper thead th, .gs-table-header-wrapper thead th {
-    background: #fff;
-  }
-}
-
-.choose-modal {
-  .gs-modal-content {
-    position: relative;
-    .choose-tip-box {
-      position: absolute;
-      bottom: 18px;
-      color: #73d13d;
-    }
-  }
-}
-.small-btn {
-  padding: 0 7px;
-  border-radius: 0px;
-}
-
 // 状态标签
 .status-tag {
   color: #975fe4;
@@ -163,20 +111,6 @@ body {
   }
 }
 
-.gs-icon-loading {
-  animation: a 2s linear infinite !important;
-}
-
-@keyframes a
-{
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(1turn);
-  }
-}
-
 .floatfix:after {
   content: "";
   display: table;
@@ -186,10 +120,7 @@ body {
 // 日期控件宽度100%的设置
 .picker-width-100 {
   width: 100%;
-  .gs-picker-input-wrapper {
+  .el-date-editor {
     width: 100%;
-    .gs-picker-input {
-      width: 100% !important;
-    }
   }
 }

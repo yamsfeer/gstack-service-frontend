@@ -1,4 +1,4 @@
-import filterTable from './filter-table';
+import filterTable from './filter-table.vue';
 import './style.scss';
 
 /* istanbul ignore next */

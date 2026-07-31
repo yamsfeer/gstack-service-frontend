@@ -141,9 +141,9 @@ import { lvsConfig } from './constant';
 import { rules_lvs } from './formRules';
 import { ruleTypes } from '@/utils/validator';
 import { downloadFileWithAuth } from '@/utils/downloadFileWithAuth';
-import selectServer from './server/selectServer';
-import selectedServer from './server/selectedServer';
-import { mapActions } from 'vuex';
+import selectServer from './server/selectServer.vue';
+import selectedServer from './server/selectedServer.vue';
+import { mapActions } from '@/stores/vuex-compat';
 import config from '@/config';
 
 const URL = config.API_GOD;

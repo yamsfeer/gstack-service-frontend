@@ -86,7 +86,7 @@ import './style.scss';
 import { dnsConfig } from './constant';
 import { rules_dns } from './formRules';
 import { ruleTypes } from '@/utils/validator';
-import { mapActions } from 'vuex';
+import { mapActions } from '@/stores/vuex-compat';
 
 export default {
   name: 'dns',

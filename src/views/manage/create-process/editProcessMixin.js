@@ -1,4 +1,4 @@
-import { mapActions } from 'vuex';
+import { mapActions } from '@/stores/vuex-compat';
 export default {
   data() {
     return {

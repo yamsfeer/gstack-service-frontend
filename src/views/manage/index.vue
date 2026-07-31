@@ -74,13 +74,13 @@
 import {
   mapState,
   mapActions
-} from 'vuex';
+} from '@/stores/vuex-compat';
 import {
   checkLoading,
   checkSuccess
-} from '@/store/status';
+} from '@/stores/vuex-compat';
 import './style.scss';
-import processModal from './process-modal';
+import processModal from './process-modal.vue';
 
 // 默认流程不能删除
 const DEFAULT_MANAGE_TYPE = 1;

@@ -1,4 +1,4 @@
-import { mapGetters, mapMutations } from 'vuex';
+import { mapGetters, mapMutations } from '@/stores/vuex-compat';
 
 /**
  * @file 离开页面时保存需要的参数，从其他页面进入时还原参数，默认可用于表格页的筛选条件
@@ -34,7 +34,7 @@ export default {
     },
     // 将状态还原，可重写
     restore() {
-      const params = this.storedParams[this.storeNamespace];
+      const params = this.storedParams && this.storedParams[this.storeNamespace];
       if (!params) return;
       const {
         keywords,

@@ -46,16 +46,16 @@ import {
   mapState,
   mapActions,
   mapGetters
-} from 'vuex';
+} from '@/stores/vuex-compat';
 import {
   checkLoading,
   checkSuccess
-} from '@/store/status';
+} from '@/stores/vuex-compat';
 import { serviceType } from './step/constant';
-import Detail from './step/detail';
-import { VmConfig, LvsAndNatConfig, VmDeleteConfig, dnsConfig } from './step/config';
-import Comment from './step/comment';
-import RightBox from './rightBox';
+import Detail from './step/detail.vue';
+import { VmConfig, LvsAndNatConfig, VmDeleteConfig, dnsConfig } from './step/config/index.js';
+import Comment from './step/comment.vue';
+import RightBox from './rightBox/index.vue';
 import './style.scss';
 import {
   OrderState,

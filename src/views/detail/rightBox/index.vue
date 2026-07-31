@@ -28,8 +28,8 @@
 
 <script>
 import './style.scss';
-import StepItem from './stepItem';
-import HandleModal from '@/views/audit/handle-modal';
+import StepItem from './stepItem.vue';
+import HandleModal from '@/views/audit/handle-modal.vue';
 export default {
   name: 'Detail',
   components: {

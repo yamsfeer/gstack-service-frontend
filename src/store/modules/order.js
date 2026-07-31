@@ -4,7 +4,7 @@ import {
   LOADING,
   SUCCESS,
   FAIL
-} from '@/store/status';
+} from '@/stores/vuex-compat';
 
 const {
   GET_ORDER_TYPE,

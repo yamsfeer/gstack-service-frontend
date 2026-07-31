@@ -1,4 +1,4 @@
-<template functional>
+<template>
   <div class="table-page">
     <div class="table-page-filter">
       <slot name="filter" />

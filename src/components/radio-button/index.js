@@ -1,4 +1,4 @@
-import radioButton from './radio-button';
+import radioButton from './radio-button.vue';
 import './style.scss';
 
 /* istanbul ignore next */

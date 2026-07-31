@@ -1,10 +1,14 @@
-const VUE_APP__ENV = process.env.VUE_APP__ENV;
-let config = require('./config.dev.js').default;
+import configDev from './config.dev.js';
+import configMock from './config.mock.js';
+import configProd from './config.prod.js';
+
+const VUE_APP__ENV = import.meta.env.VITE_APP__ENV || '';
+let config = configDev;
 
 if (VUE_APP__ENV === 'mock') {
-  config = require('./config.mock.js').default;
+  config = configMock;
 } else if (VUE_APP__ENV === 'production') {
-  config = require('./config.prod.js').default;
+  config = configProd;
 }
 
 export default config;

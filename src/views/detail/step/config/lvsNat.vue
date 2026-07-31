@@ -57,9 +57,9 @@
 <script>
 import primaryRound from '@/assets/icon-round-primary.png';
 import '../style.scss';
-import lbgroup from './chose/lbgroup';
-import logModal from './log-modal';
-import { mapActions } from 'vuex';
+import lbgroup from './chose/lbgroup.vue';
+import logModal from './log-modal.vue';
+import { mapActions } from '@/stores/vuex-compat';
 import { debounce } from '@/utils/utils';
 export default {
   name: 'LvsAndNatConfig',
@@ -119,7 +119,7 @@ export default {
         ...selectedLbg,
         ...selectedServer
       };
-      this.$set(this.configData, 0, data);
+      this.configData[0] = data;
       this.lbgroupVisible = false;
     },
     handleSubmit() {

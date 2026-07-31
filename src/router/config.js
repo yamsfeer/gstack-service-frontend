@@ -1,23 +1,23 @@
 import BasicLayout from '@/components/basic-layout';
 
-import Apply from '@/views/apply/overview';
-import MineOrder from '@/views/mineOrder';
-import Audit from '@/views/audit';
-import Manage from '@/views/manage';
-import ApplyForm from '@/views/apply/applyForm/apply-index';
-import Detail from '@/views/detail';
-import Process from '@/views/manage/create-process/index';
+import Apply from '@/views/apply/overview.vue';
+import MineOrder from '@/views/mineOrder/index.vue';
+import Audit from '@/views/audit/index.vue';
+import Manage from '@/views/manage/index.vue';
+import ApplyForm from '@/views/apply/applyForm/apply-index.vue';
+import Detail from '@/views/detail/index.vue';
+import Process from '@/views/manage/create-process/index.vue';
 
-import Server from '@/views/assets/server/server';
-import ServerDetail from '@/views/assets/server/detail';
-import Cluster from '@/views/assets/cluster/cluster';
+import Server from '@/views/assets/server/server.vue';
+import ServerDetail from '@/views/assets/server/detail/index.vue';
+import Cluster from '@/views/assets/cluster/cluster.vue';
 import ClusterDetail from '@/views/assets/cluster/detail/index.vue';
-import Lvs from '@/views/assets/lvs/lvs';
+import Lvs from '@/views/assets/lvs/lvs.vue';
 import LvsDetail from '@/views/assets/lvs/detail/index.vue';
-import Nat from '@/views/assets/nat/nat';
-import Ip from '@/views/assets/ip/ip';
-import Dns from '@/views/assets/dns/dns';
-import NetMap from '@/views/assets/netmap/netmap';
+import Nat from '@/views/assets/nat/nat.vue';
+import Ip from '@/views/assets/ip/ip.vue';
+import Dns from '@/views/assets/dns/dns.vue';
+import NetMap from '@/views/assets/netmap/netmap.vue';
 
 export default {
   basicLayout: {

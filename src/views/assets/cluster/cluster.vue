@@ -41,9 +41,8 @@
         @sizeChange="sizeChange"
         @sortChange="sortChange"
       >
-        <template v-for="(item, index) in renderCol">
+        <template v-for="(item, index) in renderCol" :key="index">
           <gs-table-column
-            :key="index"
             :label="item.label"
             :prop="item.value"
             :min-width="item.width"
@@ -110,7 +109,7 @@ import {
 } from '@/mixins';
 import { cloneDeep } from 'lodash';
 import { arr2map } from '@/views/assets/constant';
-import { clusterColumns } from '@/views/assets/modules/columns';
+import { clusterColumns } from '@/views/assets/modules/columns.js';
 import { isEmptyArr, loading, debounce } from '@/utils/utils';
 import { getAssetsClusterOption, getAssetsCluster, delAssetsCluster } from '@/service/asset';
 
@@ -213,7 +212,6 @@ export default {
       }
       this.fetchTable();
     },
-    @loading()
     async getTableList() {
       const res = await getAssetsCluster(this.getParams());
       if (res.error_code !== 0) {
@@ -224,7 +222,6 @@ export default {
       this.tableData = res.data.lb_groups;
       this.total = res.data.total;
     },
-    @loading('loadingOpt')
     async getOption() {
       const res = await getAssetsClusterOption();
       if (res.error_code !== 0) return;

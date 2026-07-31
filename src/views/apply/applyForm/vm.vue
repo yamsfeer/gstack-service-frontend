@@ -97,8 +97,8 @@
 
 <script>
 import './style.scss';
-import { mapActions } from 'vuex';
-import RadioBox from '@/components/radio-box';
+import { mapActions } from '@/stores/vuex-compat';
+import RadioBox from '@/components/radio-box.vue';
 import { vmConfig } from './constant';
 import { rules_vm } from './formRules';
 import { ruleTypes } from '@/utils/validator';

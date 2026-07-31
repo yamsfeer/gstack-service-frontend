@@ -1,12 +1,12 @@
-import RadioButton from './radio-button';
-import QueryTable from './query-table';
-import FilterTable from './filter-table';
-import FilterTableItem from './filter-table/filter-table-item';
-import ServerTable from './server-table';
-import WordLimit from './word-limit';
-import TablePage from './table-page';
-import ColConfig from './col-config';
-import transfer from './transfer';
+import RadioButton from './radio-button/index.js';
+import QueryTable from './query-table.vue';
+import FilterTable from './filter-table/index.js';
+import FilterTableItem from './filter-table/filter-table-item.vue';
+import ServerTable from './server-table.vue';
+import WordLimit from './word-limit.vue';
+import TablePage from './table-page.vue';
+import ColConfig from './col-config.vue';
+import transfer from './transfer/index.js';
 
 const components = [
   RadioButton,
@@ -20,12 +20,13 @@ const components = [
   transfer,
 ];
 
-const install = (Vue, opt = {}) => {
-  if (install.installed) {
-    return;
-  }
-  components.map(component => {
-    Vue.component(component.name, component);
+const install = (app, opt = {}) => {
+  if (install.installed) return;
+  install.installed = true;
+  components.forEach(component => {
+    if (component && component.name) {
+      app.component(component.name, component);
+    }
   });
 };
 

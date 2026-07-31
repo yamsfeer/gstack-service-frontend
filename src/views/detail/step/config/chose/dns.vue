@@ -12,7 +12,7 @@
     <div>
       <div class="select-server-search">
         <gs-input
-          v-model.trim="ip"
+          :model-value="ip" @update:model-value="(val) => $emit('update:ip', val)"
           placeholder="请输入dns关键词"
           icon="search"
           disabled
@@ -51,7 +51,7 @@
 <script>
 import {
   mapActions
-} from 'vuex';
+} from '@/stores/vuex-compat';
 export default {
   props: {
     visible: {

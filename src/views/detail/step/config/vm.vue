@@ -86,10 +86,10 @@
 <script>
 import primaryRound from '@/assets/icon-round-primary.png';
 import '../style.scss';
-import server from './chose/server';
-import ip from './chose/ip';
-import logModal from './log-modal';
-import { mapActions } from 'vuex';
+import server from './chose/server.vue';
+import ip from './chose/ip.vue';
+import logModal from './log-modal.vue';
+import { mapActions } from '@/stores/vuex-compat';
 import { debounce } from '@/utils/utils';
 const statusText = {
   'pending': '等待开通',
@@ -158,7 +158,7 @@ export default {
     confirmSelect({ selected, type }) {
       const keyMapping = { ip: 'ip_info', server: 'host_machine' };
       this.configData[this.currentChooseIndex][keyMapping[type]]= JSON.parse(JSON.stringify(selected));
-      this.$set(this.configData, this.currentChooseIndex, this.configData[this.currentChooseIndex]);
+      this.configData[this.currentChooseIndex] = this.configData[this.currentChooseIndex];
       this[`${type}Visible`] = false;
     },
     openChoose(type, index, selected, status) {

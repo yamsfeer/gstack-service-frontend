@@ -78,9 +78,9 @@
 import './style.scss';
 import { natConfig } from './constant';
 import { rules_nat } from './formRules';
-import selectServer from './server/selectServer';
-import selectedServer from './server/selectedServer';
-import { mapActions } from 'vuex';
+import selectServer from './server/selectServer.vue';
+import selectedServer from './server/selectedServer.vue';
+import { mapActions } from '@/stores/vuex-compat';
 export default {
   name: 'nat',
   props: {
