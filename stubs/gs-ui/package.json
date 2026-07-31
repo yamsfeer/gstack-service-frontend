@@ -1,0 +1,6 @@
+{
+  "name": "@gs-ui/gs-ui",
+  "version": "2.1.24",
+  "main": "index.js",
+  "private": true
+}
