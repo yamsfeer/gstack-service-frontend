@@ -261,7 +261,7 @@ export default {
     },
     getAssetsOption() {
       getSubnetByIdc().then(res => {
-        this.option['subNets'] = (res.data.statistics || [].map(item => item.sub_net));
+        this.option['subNets'] = (res.data.statistics || []).map(item => item.sub_net);
       });
       getAssetsLvsOption().then(res => {
         if (res.error_code !== 0) return;

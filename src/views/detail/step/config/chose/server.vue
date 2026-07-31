@@ -36,7 +36,7 @@
               <gs-button type="default" @click="showQueryBox = false">取消</gs-button>
             </div>
           </div>
-          <i class="gs-icon-plus-circle-o" slot='reference' @click="showQueryBox = true"></i>
+          <i class="gs-icon-plus-circle-o" @click="showQueryBox = true"></i>
         </gs-popover>
       </div>
       <gs-input
@@ -56,7 +56,7 @@
       @page-change="pageChange"
       @size-change="sizeChange">
       <gs-table-column label="选择" width="60">
-        <template slot-scope="scope">
+        <template #default="scope">
           <gs-radio-group v-model="selected">
             <gs-radio :label="scope.row.hostname">&nbsp;</gs-radio>
           </gs-radio-group>
@@ -64,12 +64,12 @@
       </gs-table-column>
       <gs-table-column label="主机名" show-overflow-tooltip prop="hostname" width="130px"></gs-table-column>
       <gs-table-column label="IP地址" show-overflow-tooltip width="120px">
-        <template slot-scope="{ row }">
+        <template #default="{ row }">
           {{ row.ip_list && row.ip_list.join(',') }}
         </template>
       </gs-table-column>
       <!-- <gs-table-column label="状态">
-        <template slot-scope="{ row }">
+        <template #default="{ row }">
           <span v-if="row.status === '正常'" class="status success">正常</span>
           <span v-else class="status fail">异常</span>
         </template>
@@ -98,11 +98,11 @@ export default {
     },
     value: {
       type: [Object, String],
-      default: _ => {}
+      default: _ => ({})
     },
     filterCondition: {
       type: Object,
-      default: _ => {}
+      default: _ => ({})
     },
     minCondition: {
       type: Object,

@@ -5,7 +5,7 @@
       <div class="page-main">
         <div class="step">
           <gs-steps :active="step" align-center>
-            <template slot="header">
+            <template #header>
               <gs-step title="待处理"></gs-step>
               <gs-step title="审核中"></gs-step>
               <gs-step title="待开通"></gs-step>

@@ -39,7 +39,7 @@ export default {
   props: {
     baseInfo: {
       type: Object,
-      default: _ => {}
+      default: _ => ({})
     },
     type: {
       type: [Number, String],
@@ -83,7 +83,7 @@ export default {
     baseInfo() {
       this.isFinish = this.baseInfo && this.baseInfo.state >= 10;
       // 11,资产录入成功确认 12,废弃
-      this.endStepData = this.baseInfo.action_logs.find(item => item.action === 11 || item.action === 12) || {};
+      this.endStepData = (this.baseInfo.action_logs || []).find(item => item.action === 11 || item.action === 12) || {};
       this.startStepData = { handler: this.baseInfo.creator, update_time: this.baseInfo.create_time };
       this.setBtnStatus();
     }

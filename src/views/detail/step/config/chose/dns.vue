@@ -35,7 +35,7 @@
         <gs-table-column label="根域" show-overflow-tooltip prop="primary_domain" width="100"></gs-table-column>
         <gs-table-column label="解析地址" show-overflow-tooltip prop="value" width="140"></gs-table-column>
         <gs-table-column label="区域" show-overflow-tooltip width="100">
-          <template slot-scope="{ row }">
+          <template #default="{ row }">
             <!-- <span>{{ row.scope === 'public' ? '公网':'私网'}}</span> -->
             <span v-if="row.scope === 'all'">公网&私网</span>
             <span v-if="row.scope === 'public'">公网</span>

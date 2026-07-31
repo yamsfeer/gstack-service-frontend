@@ -31,7 +31,7 @@ export default {
   props: {
     handleInfo: {
       type: Object,
-      default: _ => {}
+      default: _ => ({})
     }
   },
   data() {

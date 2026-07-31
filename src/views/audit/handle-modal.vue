@@ -60,7 +60,7 @@ export default {
   },
   watch: {
     visible(newVal) {
-      if (newVal) {
+      if (newVal && this.$refs.form) {
         this.$refs.form.resetFields();
       }
     }

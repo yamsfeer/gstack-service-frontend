@@ -91,8 +91,8 @@ export function isSegmentContain(seg1, seg2) {
     const [ip1, mask1] = seg1.split('/');
     const [ip2, mask2] = seg2.split('/');
 
-    const bin1 = ip2Binary(ipAndMask(ip1, number2Mask(mask1)));
-    const bin2 = ip2Binary(ipAndMask(ip2, number2Mask(mask2)));
+    const bin1 = ip2Binary(ipAndMask(ip1, number2Mask(mask1, false)));
+    const bin2 = ip2Binary(ipAndMask(ip2, number2Mask(mask2, false)));
 
     return bin1.slice(0, mask1) === bin2.slice(0, mask1);
   } catch (e) {

@@ -50,12 +50,12 @@
           >
           <!-- <gs-table-column type='selection' width="35"></gs-table-column> -->
           <gs-table-column prop="id" label="工单编号" width="100">
-            <template slot-scope="{ row }">
+            <template #default="{ row }">
               <gs-button type="text-primary" @click="$router.push(`/main/order/detail/${row.type}/${row.id}`)">{{ row.id }}</gs-button>
             </template>
           </gs-table-column>
           <gs-table-column prop="type" label="工单类型" width="120">
-            <template slot-scope="{ row }">
+            <template #default="{ row }">
               <span>{{ formatType(row.type) }}</span>
             </template>
           </gs-table-column>
@@ -63,14 +63,14 @@
           <gs-table-column prop="tenant" label="租户" min-width="140" show-overflow-tooltip/>
           <gs-table-column prop="creator" label="申请人" min-width="100" show-overflow-tooltip />
           <gs-table-column prop="state" label="状态" width="80">
-            <template slot-scope="{ row }">
+            <template #default="{ row }">
               <gs-tag :type="formatState(row.state).color">{{ formatState(row.state).text }}</gs-tag>
             </template>
           </gs-table-column>
           <!-- <gs-table-column prop="handler" label="当前处理人" width="150"/> -->
           <gs-table-column prop="create_time" label="创建时间" width="165"/>
           <gs-table-column label="操作" width="150">
-            <template slot-scope="{ row }">
+            <template #default="{ row }">
               <gs-button type="text-primary" :disabled="row.state !== 11" @click="reSubmit(row)">重新审核</gs-button>
               <gs-button type="text-primary" :disabled="row.state !== 1" @click="openHandleModal(row, 12)">丢弃</gs-button>
             </template>

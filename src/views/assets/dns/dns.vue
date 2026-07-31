@@ -1,7 +1,8 @@
 <template>
   <div class="assets-cluster">
     <table-page>
-      <filter-table slot="filter" label-width="140px" v-loading="loadingOpt">
+<template #filter>
+      <filter-table label-width="140px" v-loading="loadingOpt">
         <filter-table-item label="根域">
           <radio-button
             :data="assetDomainListMap"
@@ -29,7 +30,9 @@
           />
         </filter-table-item> -->
       </filter-table>
-      <div class="tool" slot="tool">
+</template>
+<template #tool>
+      <div class="tool">
         <gs-search
           v-model="keywords"
           :input-search="debounceFetch"
@@ -39,8 +42,9 @@
           <gs-button type="primary" @click="colConfigVisible = true">列配置</gs-button>
         </div>
       </div>
+</template>
+<template #table>
       <gs-server-table
-        slot="table"
         ref="serverTable"
         v-loading="loading"
         :table-data="tableData"
@@ -60,7 +64,7 @@
             :fixed="item.fixed"
             show-overflow-tooltip
           >
-            <template slot-scope="{ row }">
+            <template #default="{ row }">
               <template v-if="item.value === 'groupName'">
                 <router-link
                   :to="`/main/assets/balancing/cluster/detail/${row.esId}`"
@@ -72,7 +76,7 @@
                 </gs-tag>
               </template>
               <template v-else>
-                <span>{{ row[item.value] | arr2str }}</span>
+                <span>{{ arr2str(row[item.value]) }}</span>
               </template>
             </template>
           </gs-table-column>
@@ -81,7 +85,7 @@
         label="处理状态"
         min-width="108"
         >
-          <template slot-scope="{ row }">
+          <template #default="{ row }">
             <span v-if="row.task_status === 'executing'" class="executing-message">处理中</span>
             <gs-popover
             v-else-if="row.task_status === 'failed'"
@@ -96,7 +100,7 @@
           </template>
         </gs-table-column>
         <gs-table-column label="操作" min-width="120px" v-if="has()">
-            <template slot-scope="{ row }">
+            <template #default="{ row }">
               <!-- <template>
                 <gs-icon name="delete-o" class="operation" @click="handleDel(row)" />
               </template> -->
@@ -116,6 +120,7 @@
             </template>
           </gs-table-column>
       </gs-server-table>
+</template>
     </table-page>
     <col-config
       title="配置显示列"
@@ -207,16 +212,15 @@ export default {
       deep: true
     },
   },
-  filters: {
+  methods: {
     arr2str(arr = '') {
       try {
         return JSON.parse(arr).join('，');
       } catch (error) {
         return arr;
       }
-    }
-  },
-  methods: {
+    },
+
     async checkTask() {
       if(this.executingItems.length) {
         try {
@@ -304,7 +308,7 @@ export default {
 
     // 列配置
     saveColConfig() {
-      this.$refs.serverTable.$refs.gsmultipleTable.doLayout();
+      this.$refs.serverTable?.$refs.gsmultipleTable?.doLayout?.();
       this.renderCol = this.sortCol;
       this.saveToLocal(this.LOCAL_STORAGE_KEY, this.sortCol);
       this.colConfigVisible = false;

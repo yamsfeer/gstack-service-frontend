@@ -45,7 +45,12 @@ export default {
   props: {
     value: {
       type: Object,
-      default: () => {}
+      default: () => ({})
+    },
+    // Vue 3 v-model 绑定 modelValue；无值时兼容 Vue 2 :value 语法
+    modelValue: {
+      type: Object,
+      default: undefined
     },
     index: {
       type: Number,
@@ -62,12 +67,15 @@ export default {
   },
   data() {
     return {
-      item: this.value
+      item: this.modelValue !== undefined ? this.modelValue : this.value
     };
   },
   watch: {
     value(val) {
       this.item = val;
+    },
+    modelValue(val) {
+      if (val !== undefined) this.item = val;
     }
   }
 };

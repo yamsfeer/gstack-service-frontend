@@ -27,7 +27,7 @@
           <gs-radio :label="false">否</gs-radio>
         </gs-radio-group>
         <gs-popover trigger="hover" placement="top" width="400px">
-          <i class="gs-icon-question-circle-o" slot='reference'></i>
+          <i class="gs-icon-question-circle-o"></i>
           <span>{{natConfig.tip.ip}}</span>
         </gs-popover>
         <span class="tip">特殊要求使用独立外网IP请选"是"，我们将为您每一台后端主机都配置独立的外网IP地址。如果您选择"否"，我们会默认给您安排一个外网IP地址。</span>
@@ -44,7 +44,7 @@
           <gs-radio v-for="(value, index) in natConfig.peak" :class="{'is-checked': form.peak_prediction_in_mbps == value}" :label="value" :key="index">{{ value }}</gs-radio>
         </gs-radio-group>
         <gs-input class="width-150 margin-left-16" type="number" v-model="form.peak_prediction_in_mbps">
-          <template slot="append">mbps</template>
+          <template #append>mbps</template>
         </gs-input>
         <span class="tip">为这次申请预估一个使用带宽的峰值，我们会以此为根据为您分配贴合的资源。</span>
       </gs-form-item>

@@ -44,7 +44,7 @@ export default {
   props: {
     value: {
       type: Object,
-      default: () => {}
+      default: () => ({})
     },
     index: {
       type: Number,

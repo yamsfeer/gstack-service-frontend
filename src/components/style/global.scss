@@ -87,3 +87,17 @@ $scrollbar-width: 6px;
 ::-webkit-scrollbar-thumb:hover {
   background-color: rgba(151, 168, 190, .5);
 }
+
+/* gs-ui 字体图标在重构后未引入字体资源，icon 类元素为空导致不可见/不可点。
+   这里为流程编辑等场景常用的 edit 图标补充可见内容（Unicode 铅笔符号） */
+.gs-icon-edit {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  text-align: center;
+  font-size: 14px;
+}
+.gs-icon-edit::before {
+  content: '\270E';
+}

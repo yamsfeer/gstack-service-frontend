@@ -2,6 +2,11 @@
 node_modules
 /dist
 
+# Test artifacts (auto-generated, large, re-generatable)
+tests/coverage/
+tests/e2e-report/
+test-results/
+
 # local env files
 .env.local
 .env.*.local

@@ -14,6 +14,7 @@ export default defineConfig({
   },
   server: {
     port: 8080,
+    host: '127.0.0.1',
     proxy: {
       '/ticket': {
         target: 'http://localhost:8000',
@@ -86,11 +87,27 @@ export default defineConfig({
   },
   test: {
     environment: 'happy-dom',
+    testTimeout: 15000, 
     include: ['tests/**/*.{test,spec}.{js,ts}'],
+    exclude: ['tests/e2e/**', 'node_modules/**'],
+    globals: true,
+    setupFiles: ['tests/setup.js'],
     resolve: {
       alias: {
         '@': resolve(__dirname, 'src'),
       },
+    },
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'html', 'json-summary', 'lcov'],
+      reportsDirectory: 'tests/coverage',
+      include: ['src/**/*.{js,vue}'],
+      exclude: [
+        'src/main.js',
+        'src/store/**',
+        'src/router/config.js',
+        'src/config/config.prod.js',
+      ],
     },
   },
 });

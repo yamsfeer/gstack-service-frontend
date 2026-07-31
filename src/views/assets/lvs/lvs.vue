@@ -1,7 +1,8 @@
 <template>
   <div class="assets-lvs">
     <table-page>
-      <filter-table slot="filter" label-width="140px" v-loading="loadingOpt">
+<template #filter>
+      <filter-table label-width="140px" v-loading="loadingOpt">
         <filter-table-item label="产品线(多选)">
           <radio-button
             :data="assetProductListMap"
@@ -18,7 +19,9 @@
           />
         </filter-table-item>
       </filter-table>
-      <div class="tool" slot="tool">
+</template>
+<template #tool>
+      <div class="tool">
         <gs-search
           v-model="keywords"
           :input-search="debounceFetch"
@@ -29,8 +32,9 @@
           <gs-button type="primary" @click="$router.push('/main/assets/balancing/lvs/add')" v-if="has()">添加</gs-button>
         </div>
       </div>
+</template>
+<template #table>
       <gs-server-table
-        slot="table"
         ref="serverTable"
         v-loading="loading"
         :table-data="tableData"
@@ -50,7 +54,7 @@
             :fixed="item.fixed"
             show-overflow-tooltip
           >
-            <template slot-scope="{ row }">
+            <template #default="{ row }">
               <template v-if="item.value === 'instanceName'">
                 <router-link
                   :to="`/main/assets/balancing/lvs/detail/${row.instanceName}`"
@@ -67,7 +71,7 @@
                   </gs-button>
                 </template>
                 <template v-else>
-                  <span>{{ row[item.value] | arr2str }}</span>
+                  <span>{{ arr2str(row[item.value]) }}</span>
                 </template>
               </template>
               <!-- 集群id -> 集群名 -->
@@ -78,13 +82,13 @@
                 <div v-for="(ip, index) in row[item.value]" :key="index" class="line-height-20">{{ ip }}</div>
               </template>
               <template v-else>
-                <span>{{ row[item.value] | arr2str }}</span>
+                <span>{{ arr2str(row[item.value]) }}</span>
               </template>
             </template>
           </gs-table-column>
         </template>
         <gs-table-column label="操作" min-width="80px" fixed="right" v-if="has()">
-            <template slot-scope="{ row }">
+            <template #default="{ row }">
               <!-- <template>
                 <gs-icon name="delete-o" class="operation" @click="handleDel(row)" />
               </template> -->
@@ -92,6 +96,7 @@
             </template>
           </gs-table-column>
       </gs-server-table>
+</template>
     </table-page>
     <col-config
       title="配置显示列"
@@ -181,16 +186,15 @@ export default {
       deep: true
     },
   },
-  filters: {
+  methods: {
     arr2str(arr = '') {
       try {
         return JSON.parse(arr).join('，');
       } catch (error) {
         return arr;
       }
-    }
-  },
-  methods: {
+    },
+
     getParams() {
       const params = {
         search_condition: this.keywords,
@@ -264,7 +268,7 @@ export default {
 
     // 列配置
     saveColConfig() {
-      this.$refs.serverTable.$refs.gsmultipleTable.doLayout();
+      this.$refs.serverTable?.$refs.gsmultipleTable?.doLayout?.();
       this.renderCol = this.sortCol;
       this.saveToLocal(this.LOCAL_STORAGE_KEY, this.sortCol);
       this.colConfigVisible = false;

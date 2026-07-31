@@ -19,28 +19,28 @@
         @size-change="sizeChange"
         >
         <gs-table-column prop="name" label="名称" show-overflow-tooltip>
-           <template slot-scope="{ row }">
+           <template #default="{ row }">
              <gs-button type="text-primary" @click="$router.push('/main/manage/process/edit/' + row.id)">{{ row.name }}</gs-button>
           </template>
         </gs-table-column>
         <gs-table-column prop="type" label="类型">
-          <template slot-scope="{ row }">
+          <template #default="{ row }">
             <span>{{ row.type === 1 ? '默认' : '自定义'}}</span>
           </template>
         </gs-table-column>
         <gs-table-column prop="description" label="描述" show-overflow-tooltip>
-          <template slot-scope="{ row }">
+          <template #default="{ row }">
             <span>{{ row.description || '无'}}</span>
           </template>
         </gs-table-column>
         <gs-table-column prop="state" label="应用状态">
-          <template slot-scope="{ row }">
+          <template #default="{ row }">
             <gs-tag v-if="row.enable" type="success">应用</gs-tag>
             <gs-tag v-else type="danger">禁用</gs-tag>
           </template>
         </gs-table-column>
         <gs-table-column prop="state" label="就绪状态">
-          <template slot-scope="{ row }">
+          <template #default="{ row }">
             <gs-tag v-if="row.ready" type="success">有效</gs-tag>
             <gs-tag v-else type="danger">无效</gs-tag>
           </template>
@@ -48,7 +48,7 @@
         <gs-table-column show-overflow-tooltip prop="create_time" label="创建时间" min-width="100" />
         <gs-table-column show-overflow-tooltip prop="update_time" label="更新时间" min-width="100" />
         <gs-table-column prop="create_time" label="操作">
-          <template slot-scope="{ row }">
+          <template #default="{ row }">
             <gs-button type="text-primary" @click="openProcess(row.id)" :disabled="row.enable || !row.ready">启用</gs-button>
             <gs-button
               type="text-primary"

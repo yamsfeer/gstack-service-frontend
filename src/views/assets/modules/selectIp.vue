@@ -33,7 +33,7 @@
         @page-change="pageChange"
         @size-change="sizeChange">
         <gs-table-column label="选择" width="60">
-          <template slot-scope="scope">
+          <template #default="scope">
             <gs-radio-group v-model="selected" @change="selectIp">
               <gs-radio :label="scope.row.ipAddress" :disabled="selectedListObj[scope.row.ipAddress]">&nbsp;</gs-radio>
             </gs-radio-group>
@@ -66,7 +66,7 @@ export default {
     },
     value: {
       type: [Object, String],
-      default: _ => {}
+      default: _ => ({})
     },
     selectedList: {
       type: [Array, Object],
@@ -74,7 +74,7 @@ export default {
     },
     pageFilterCondition: {
       type: Object,
-      default: _ => {}
+      default: _ => ({})
     }
   },
   computed: {

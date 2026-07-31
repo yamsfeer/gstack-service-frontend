@@ -202,8 +202,8 @@ export default {
       this.modalVisible = val;
       const [defaultIdc] = this.idcs;
       const [defaultType] = this.ipTypes;
-      this.form.idc = defaultIdc.value;
-      this.form.type = defaultType.value;
+      if (defaultIdc) this.form.idc = defaultIdc.value;
+      if (defaultType) this.form.type = defaultType.value;
     }
   },
   methods: {

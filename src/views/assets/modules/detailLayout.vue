@@ -2,7 +2,8 @@
   <div class="detail-layout-page floatfix" v-loading="loading">
     <!-- 详情展示 -->
     <gs-form key="1" v-if="!isEditing" class="data-form" label-width="140px">
-      <div class="block" v-for="(item, key) in keyMap" :key="key" v-if="judgeShowDeviceProp(key)">
+      <template v-for="(item, key) in keyMap" :key="key">
+      <div class="block" v-if="judgeShowDeviceProp(key)">
         <div class="header">{{ item.label }}</div>
         <div class="main">
           <gs-col v-for="(prop, index) in item.prop" :key="index" :span="prop.width || 8">
@@ -18,7 +19,6 @@
               <!-- 旗下虚拟机 -->
               <div v-else-if="prop.display === 'table' && prop.key === 'virtualServer'" class="table">
                 <gs-server-table
-                  slot="table"
                   v-loading="loading"
                   :table-data="table.data"
                   :total-num="table.total"
@@ -32,7 +32,7 @@
                     :key="index"
                     :prop="col.prop"
                     :label="col.label">
-                    <template slot-scope="{ row }">
+                    <template #default="{ row }">
                       <router-link
                         v-if="col.prop === 'logicalHostName'"
                         :to="`/main/assets/server/detail/${row.assetServerUuid}`"
@@ -50,7 +50,7 @@
                     :key="index"
                     :prop="col.prop"
                     :label="col.label">
-                    <template slot-scope="{ row }">
+                    <template #default="{ row }">
                       <span v-if="col.type === 'boolean'">{{row[col.prop] ? '是' : '否'}}</span>
                       <span v-else>{{ row[col.detailProp || col.prop] || col.value }}</span>
                     </template>
@@ -74,10 +74,12 @@
           </gs-col>
         </div>
       </div>
+      </template>
     </gs-form>
     <!-- 编辑 -->
     <gs-form key="2" v-else ref="form" class="edit-form" label-width="140px" :model="form" :rules="rules">
-      <div class="block" v-for="(item, key) in keyMap" :key="key" v-if="!item.onlyDetail && judgeShowDeviceProp(key)">
+      <template v-for="(item, key) in keyMap" :key="key">
+      <div class="block" v-if="!item.onlyDetail && judgeShowDeviceProp(key)">
         <div class="header">{{ item.label }}</div>
         <div class="main">
           <gs-col v-for="(prop, index) in item.prop" :key="index" :span="prop.width || 8">
@@ -99,7 +101,7 @@
                     prop="operation"
                     label="操作"
                     max-width="40">
-                    <template slot-scope="scope">
+                    <template #default="scope">
                       <i class="gs-icon-delete-o icon-btn margin-right-4" v-if="prop.isDelete" @click="delData(prop.key, scope.$index)"></i>
                       <i class="gs-icon-edit icon-btn" v-if="prop.isEdit" @click="openModal(scope.$index, prop.modalType, prop.key)"></i>
                     </template>
@@ -110,7 +112,7 @@
                     :prop="col.prop"
                     :label="col.label"
                     width="100">
-                    <template slot-scope="{ row, $index }">
+                    <template #default="{ row, $index }">
                       <gs-checkbox v-if="col.type === 'boolean'" v-model="row[col.prop]" @change="changeAmdinIp($event, col.prop, $index)"></gs-checkbox>
                       <gs-select v-else-if="col.type === 'select'" v-model="row[col.prop]" :disabled="!row.isNew" @change="selectDirectorMaster($event, $index)">
                         <gs-option v-for="(item, index) in form.memberHostList || []" :key="index" :label="item.logicalHostName" :value="item.assetServerUuid"></gs-option>
@@ -158,7 +160,7 @@
                   {{port}}
                 </gs-tag>
                 <gs-input :class="{'margin-left-16': form[prop.key] && form[prop.key].length > 0}" class="width-150 no-append-padding" type="number" v-model="port" placeholder="添加端口" @keyup.enter="addPort(prop.key)" min="1" max="65535">
-                  <template slot="append">
+                  <template #append>
                     <gs-button type="text" icon="plus" @click="addPort(prop.key)"></gs-button>
                   </template>
                 </gs-input>
@@ -167,7 +169,7 @@
               <div v-else>
                 <gs-textarea v-model="form[prop.key]" v-if="prop.display === 'textarea'" />
                 <gs-input v-model="form[prop.formKey || prop.key]" v-else :disabled="prop.disabled">
-                  <template slot="append" v-if="prop.unit">{{ prop.unit }}</template>
+                  <template #append v-if="prop.unit">{{ prop.unit }}</template>
                 </gs-input>
                 <!-- <gs-input v-model="form[prop.key]" v-else :disabled="prop.disabled" /> -->
               </div>
@@ -175,6 +177,7 @@
           </gs-col>
         </div>
       </div>
+      </template>
     </gs-form>
   </div>
 </template>
@@ -257,7 +260,7 @@ export default {
       handler(newVal) {
         if (!newVal || this.type !== 'cluster') return;
         getSubnetByIdc({ idcList: [newVal] }).then(res => {
-          this.option['subNets'] = (res.data.statistics || [].map(item => item.sub_net));
+          this.option['subNets'] = (res.data.statistics || []).map(item => item.sub_net);
           const isFind = this.option.subNets.find(item => item === this.form.subNet);
           if (!isFind) this.form.subNet = '';
         });
@@ -457,7 +460,12 @@ export default {
       this.form.privateVipList = newPrivateVipList;
     },
     addPort(key) {
-      if (!ruleTypes.rightInt(this.port) || this.port === '') {
+      // 端口为空（含被清空为 null）时直接返回，避免 parseInt(null)=NaN 混入端口列表
+      if (this.port === '' || this.port == null) {
+        this.$Message.warning('请输入合法的端口');
+        return;
+      }
+      if (!ruleTypes.rightInt(this.port)) {
         this.$Message.warning('请输入合法的端口');
         return;
       }

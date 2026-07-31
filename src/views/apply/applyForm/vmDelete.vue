@@ -19,13 +19,15 @@
           ref="popover"
           >
             <span>请先选择所属租户</span>
+            <template #reference>
+            <gs-button
+            v-popover:popover
+            type="primary"
+            @click="selectVisible = true"
+            :disabled="!form.tenant_id"
+            >添加</gs-button>
+            </template>
           </gs-popover>
-          <gs-button
-          v-popover:popover
-          type="primary"
-          @click="selectVisible = true"
-          :disabled="!form.tenant_id"
-          slot="reference">添加</gs-button>
         </div>
         <selected-server
           class="width-874"

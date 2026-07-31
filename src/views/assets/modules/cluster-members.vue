@@ -9,12 +9,12 @@
     <slot>
       <gs-table :data="tableData" v-loading="loading">
         <gs-table-column prop="date" label="当前实例主分发器标识" show-overflow-tooltip>
-          <template slot-scope="{ row }">
+          <template #default="{ row }">
             <gs-radio :value="row.esId" :label="value" disabled />
           </template>
         </gs-table-column>
         <gs-table-column prop="logicalHostName" label="主机名" show-overflow-tooltip>
-          <template slot-scope="{ row }">
+          <template #default="{ row }">
             <router-link :to="`/main/assets/server/detail/${row.assetServerUuid}`">
               {{ row.logicalHostName }}
             </router-link>
@@ -23,8 +23,8 @@
         <gs-table-column prop="assetServerType" label="服务器类型" show-overflow-tooltip />
         <gs-table-column prop="assetLevel" label="业务等级" show-overflow-tooltip />
         <gs-table-column prop="logicalIpListIpAddress" label="管理IP" show-overflow-tooltip>
-          <template slot-scope="{ row }">
-            {{ row.logicalIpList | adminIp }}
+          <template #default="{ row }">
+            {{ adminIp(row.logicalIpList) }}
           </template>
         </gs-table-column>
       </gs-table>
@@ -61,7 +61,7 @@ export default {
       this.modalVisible = val;
     }
   },
-  filters: {
+  methods: {
     adminIp(logicalIpListStr) {
       try {
         const logicalIpList = JSON.parse(logicalIpListStr);
@@ -73,9 +73,8 @@ export default {
       } catch (e) {
         return logicalIpListStr;
       }
-    }
-  },
-  methods: {
+    },
+
     close() {
       this.$emit('update:visible', false);
     },

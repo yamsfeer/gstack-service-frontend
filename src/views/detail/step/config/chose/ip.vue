@@ -14,7 +14,7 @@
         class="margin-bottom-16"
         :data="idcData">
         <gs-table-column label="选择" width="40">
-          <template slot-scope="scope">
+          <template #default="scope">
             <gs-radio-group v-model="subnet">
               <gs-radio :label="scope.row.subnet">&nbsp;</gs-radio>
             </gs-radio-group>
@@ -33,7 +33,7 @@
         @page-change="pageChange"
         @size-change="sizeChange">
         <gs-table-column label="选择" width="40">
-          <template slot-scope="scope">
+          <template #default="scope">
             <gs-radio-group v-model="selected">
               <gs-radio :label="scope.row.ip" :disabled="selectedList[scope.row.ip]">&nbsp;</gs-radio>
             </gs-radio-group>
@@ -60,11 +60,11 @@ export default {
     },
     value: {
       type: [Object, String],
-      default: _ => {}
+      default: _ => ({})
     },
     selectedList: {
       type: [Array, Object],
-      default: _ => {}
+      default: _ => ({})
     },
     idc: {
       type: String,
@@ -167,7 +167,7 @@ export default {
       };
       this.getVmIp(params).then(res => {
         this.loading = false;
-        const data = res.data.subnet_ips;
+        const data = (res.data && res.data.subnet_ips) || [];
         this.total = data.length;
         this.tableData = data.slice((this.pageNum - 1) * this.pageSize, this.pageNum * this.pageSize);
         this.allIpList = data;

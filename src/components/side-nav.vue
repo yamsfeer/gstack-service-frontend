@@ -7,31 +7,13 @@
     router
     class="side-nav-menu"
   >
-    <template v-for="item in data" :key="item.path">
-      <!-- 有子菜单 -->
-      <el-sub-menu v-if="item.children && item.children.length" :index="'/' + item.path">
-        <template #title>
-          <el-icon v-if="item.icon"><component :is="iconMap[item.icon]" /></el-icon>
-          <span>{{ item.title }}</span>
-        </template>
-        <el-menu-item
-          v-for="child in item.children"
-          :key="child.path"
-          :index="'/' + child.path"
-        >
-          {{ child.title }}
-        </el-menu-item>
-      </el-sub-menu>
-      <!-- 无子菜单 -->
-      <el-menu-item v-else :index="'/' + item.path">
-        <el-icon v-if="item.icon"><component :is="iconMap[item.icon]" /></el-icon>
-        <span>{{ item.title }}</span>
-      </el-menu-item>
-    </template>
+    <!-- 递归渲染，支持多级子菜单 -->
+    <nav-item v-for="item in data" :key="item.path" :item="item" :icon-map="iconMap" />
   </el-menu>
 </template>
 
 <script>
+import { markRaw } from 'vue';
 import {
   Menu as IconMenu,
   Setting,
@@ -42,16 +24,21 @@ import {
   List,
   HomeFilled,
 } from '@element-plus/icons-vue';
+import NavItem from './nav-item.vue';
 
-const iconMap = {
+// markRaw 阻止 Vue 对组件引用做 reactive 包装（否则触发 "Component that was made reactive" 警告）
+const iconMap = markRaw({
   bars: Tickets,
   homepage: HomeFilled,
   'setting-o': Setting,
   unchecked: Document,
-};
+});
 
 export default {
   name: 'SideNav',
+  components: {
+    NavItem,
+  },
   props: {
     data: { type: Array, default: () => [] },
   },

@@ -41,11 +41,11 @@
           <div>
             <label>CPU核数：</label>
             <gs-input :class="{'not-error': form.cpu_core_quantity <= 64 }"  class="width-150 margin-left-16" v-model="form.cpu_core_quantity" type="number" min="1" max="64">
-              <template slot="append">核</template>
+              <template #append>核</template>
             </gs-input>
             <label class="margin-left-24">内存容量：</label>
             <gs-input :class="{'not-error': form.memory_size_in_gb <= maxMemory }" class="width-150 margin-left-16" v-model="form.memory_size_in_gb" type="number" min="1" :max="maxMemory">
-              <template slot="append">GB</template>
+              <template #append>GB</template>
             </gs-input>
           </div>
         </div>
@@ -55,7 +55,7 @@
           <gs-radio v-for="(value, index) in vmConfig.memory" :label="value" :key="index">{{ value + 'GB'}}</gs-radio>
         </gs-radio-group>
         <gs-input class="width-150 margin-left-16" v-model="form.memory_in_gb">
-          <template slot="append">GB</template>
+          <template #append>GB</template>
         </gs-input>
       </gs-form-item> -->
       <gs-form-item label="额外磁盘容量：" prop="disk_size_in_gb">
@@ -63,13 +63,13 @@
           <gs-radio v-for="(value, index) in vmConfig.disk" :class="{'is-checked': form.disk_size_in_gb == value}" :label="value" :key="index">{{ value + 'GB'}}</gs-radio>
         </gs-radio-group>
         <gs-input class="width-150 margin-left-16" type="number" v-model="form.disk_size_in_gb">
-          <template slot="append">GB</template>
+          <template #append>GB</template>
         </gs-input>
         <span class="warning-tip">申请的虚拟机有sqlserver时，将自动挂载一个50GB的磁盘。</span>
       </gs-form-item>
       <gs-form-item label="申请数量：" prop="vm_count">
         <gs-input class="width-150" type="number" v-model="form.vm_count" max="5" min="1">
-          <template slot="append">台</template>
+          <template #append>台</template>
         </gs-input>
       </gs-form-item>
       <gs-form-item label="系统模板：" prop="os_name">
@@ -78,9 +78,11 @@
           <gs-option value="CentOS" label="CentOS"></gs-option>
         </gs-select>
         <gs-select class="width-350 margin-left-16" v-model="form.os_name">
-          <gs-option v-for="item in vmConfig.systemTemplate || []" v-if="item.type.toLowerCase() === form.template_type.toLowerCase()" :key="item.version" :value="item.version" :label="item.version">
-            <span :title="item.version">{{ item.version }}</span>
-          </gs-option>
+          <template v-for="item in vmConfig.systemTemplate || []" :key="item.version">
+            <gs-option v-if="item.type && item.type.toLowerCase() === form.template_type.toLowerCase()" :value="item.version" :label="item.version">
+              <span :title="item.version">{{ item.version }}</span>
+            </gs-option>
+          </template>
         </gs-select>
       </gs-form-item>
       <gs-form-item label="申请理由：" prop="usage">

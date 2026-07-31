@@ -12,12 +12,12 @@
          <div>
            <gs-table :data="configData" class="bordered-table">
               <gs-table-column label="操作" min-width="50">
-                <template slot-scope="scope">
+                <template #default="scope">
                   <gs-button class="small-btn" @click="openLog(scope.row)">日志</gs-button>
                 </template>
               </gs-table-column>
               <gs-table-column show-overflow-tooltip label="负载均衡集群" min-width="100">
-                <template slot-scope="{ row }">
+                <template #default="{ row }">
                     <div class="choose-box" @click="openChoose()">
                       {{ row.groupName }}
                       <i class="gs-icon-search"></i>
@@ -66,11 +66,11 @@ export default {
   props: {
     baseInfo: {
       type: Object,
-      default: _ => {}
+      default: _ => ({})
     },
     handleInfo: {
       type: Object,
-      default: _ => {}
+      default: _ => ({})
     },
     isAudit: {
       type: Boolean,

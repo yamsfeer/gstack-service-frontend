@@ -1,7 +1,7 @@
 <template>
   <div class="assets-server">
-    <table-page>
-      <filter-table slot="filter" label-width="140px" v-loading="loadingOpt">
+    <table-page><template #filter>
+      <filter-table label-width="140px" v-loading="loadingOpt">
         <filter-table-item label="产品线(多选)">
           <radio-button
             :data="assetProductListMap"
@@ -48,8 +48,8 @@
             v-model="form.assetOwner"
           />
         </filter-table-item>
-      </filter-table>
-      <div class="tool" slot="tool">
+      </filter-table></template>
+      <template #tool><div class="tool">
         <gs-search
           v-model="keywords"
           :input-search="debounceFetch"
@@ -60,8 +60,7 @@
           <gs-button type="primary" @click="$router.push('/main/assets/server/add')" v-if="has()">手工录入</gs-button>
         </div>
       </div>
-      <gs-server-table
-        slot="table"
+      </template><template #table><gs-server-table
         ref="serverTable"
         v-loading="loading"
         :table-data="tableData"
@@ -81,7 +80,7 @@
             :fixed="item.fixed"
             show-overflow-tooltip
           >
-            <template slot-scope="{ row }">
+            <template #default="{ row }">
               <template v-if="item.value === 'logicalHostName'">
                 <router-link
                   :to="`/main/assets/server/detail/${row.assetServerUuid}`"
@@ -103,7 +102,7 @@
             </template>
           </gs-table-column>
         </template>
-      </gs-server-table>
+      </gs-server-table></template>
     </table-page>
     <col-config
       title="配置显示列"
@@ -261,7 +260,7 @@ export default {
 
     // 列配置
     saveColConfig() {
-      this.$refs.serverTable.$refs.gsmultipleTable.doLayout();
+      this.$refs.serverTable?.$refs.gsmultipleTable?.doLayout?.();
       this.renderCol = this.sortCol;
       this.saveToLocal(this.LOCAL_STORAGE_KEY, this.sortCol);
       this.colConfigVisible = false;

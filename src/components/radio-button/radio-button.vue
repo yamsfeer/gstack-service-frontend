@@ -44,8 +44,13 @@ export default {
   name: 'RadioButton',
   props: {
     data: Array,
+    // Vue 2 语法 :value；Vue 3 下 v-model 绑定 modelValue，二者兼容
     value: {
-      required: true
+      default: () => []
+    },
+    // modelValue 用于 Vue 3 v-model；无 default 时未传即为 undefined，从而兼容 Vue 2 :value 语法
+    modelValue: {
+      default: undefined
     },
     multiple: {
       type: Boolean,
@@ -61,7 +66,8 @@ export default {
   },
   data() {
     return {
-      active: this.value,
+      // v-model(modelValue) 优先，兼容旧 :value 用法
+      active: this.modelValue !== undefined ? this.modelValue : this.value,
       timer: null,
       isShow: false
     };
@@ -73,7 +79,10 @@ export default {
   },
   watch: {
     value(val) {
-      this.active = [...val];
+      if (this.modelValue === undefined) this.active = [...val];
+    },
+    modelValue(val) {
+      if (val !== undefined) this.active = [...val];
     },
   },
   methods: {
@@ -84,7 +93,8 @@ export default {
     handleClick(item, index) {
       if (this.multiple && this.active.includes(item.value)) {
         const index = this.active.findIndex(a => a === item.value);
-        this.$delete(this.active, index);
+        // Vue 3 中 $delete 已移除，使用 splice
+        this.active.splice(index, 1);
       } else {
         this.active = this.multiple
           ? [...this.active, item.value]

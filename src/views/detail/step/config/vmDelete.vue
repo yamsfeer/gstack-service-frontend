@@ -12,7 +12,7 @@
          <div>
            <gs-table :data="configData" class="bordered-table">
               <gs-table-column label="操作" min-width="55">
-                <template slot-scope="scope">
+                <template #default="scope">
                   <gs-button class="small-btn" @click="openLog(scope.row)">日志</gs-button>
                   <gs-button class="small-btn" type="danger" @click="delHost(scope.$index, scope.row.id)" :disabled="formatTaskStates(scope.row.status) === 'success' || formatTaskStates(scope.row.status) === 'progress' || disabled">删除</gs-button>
                 </template>
@@ -20,7 +20,7 @@
               <gs-table-column show-overflow-tooltip label="删除的虚拟机" prop="vm_name"></gs-table-column>
               <gs-table-column show-overflow-tooltip label="宿主机" prop="hm_name"></gs-table-column>
               <gs-table-column label="dns" min-width="120">
-                <template slot-scope="scope">
+                <template #default="scope">
                     <div class="choose-box line-height-22" @click="openChoose('dns', scope.$index, scope.row)">
                       <gs-tag v-for="dns in scope.row.dns || []" :key="dns.id">{{ dns.sub_domain }}</gs-tag>
                       <i class="gs-icon-search"></i>
@@ -32,7 +32,7 @@
                 width="40"
                 class-name="center"
                 label-class-name="center">
-                <template slot-scope="{ row }">
+                <template #default="{ row }">
                     <gs-tooltip :title="statusText[formatTaskStates(row.status)]" placement="top">
                       <span :class="['dot', 'status', formatTaskStates(row.status)]"></span>
                     </gs-tooltip>
@@ -83,11 +83,11 @@ export default {
   props: {
     baseInfo: {
       type: Object,
-      default: _ => {}
+      default: _ => ({})
     },
     handleInfo: {
       type: Object,
-      default: _ => {}
+      default: _ => ({})
     },
     isAudit: {
       type: Boolean,
@@ -249,7 +249,7 @@ export default {
         if (res.error_code === 0) {
           this.configData = res.data.vm_collection_tasks;
           // 从detail中获取dns
-          const allDns = this.baseInfo.configurations.dns || [];
+          const allDns = (this.baseInfo.configurations && this.baseInfo.configurations.dns) || [];
           this.configData.forEach(item => {
             item.dns = allDns.filter(dns => dns.server_uuid === item.server_uuid) || [];
           });

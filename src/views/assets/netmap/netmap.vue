@@ -1,7 +1,8 @@
 <template>
   <div class="assets-netmap">
     <table-page>
-      <filter-table slot="filter" label-width="140px" v-loading="loadingOpt">
+<template #filter>
+      <filter-table label-width="140px" v-loading="loadingOpt">
         <filter-table-item label="机房">
           <radio-button
             :data="assetIdcListMap"
@@ -15,7 +16,9 @@
           />
         </filter-table-item>
       </filter-table>
-      <div class="tool" slot="tool">
+</template>
+<template #tool>
+      <div class="tool">
         <gs-search
           v-model="keywords"
           :input-search="debounceFetch"
@@ -25,8 +28,9 @@
           <gs-button type="primary" @click="colConfigVisible = true">列配置</gs-button>
         </div>
       </div>
+</template>
+<template #table>
       <gs-server-table
-        slot="table"
         ref="serverTable"
         v-loading="loading"
         :table-data="tableData"
@@ -45,7 +49,7 @@
             :sortable="item.sortable"
             show-overflow-tooltip
           >
-            <template slot-scope="{ row }">
+            <template #default="{ row }">
               <!-- <template v-if="item.value === 'public_ip'">
                 <router-link
                   :to="`/main/assets/server/detail/${row[item.value]}`"
@@ -60,12 +64,13 @@
                 <div v-for="(domain, index) in JSON.parse(row.domains)" :key="index" class="line-height-20">{{ domain }}</div>
               </template>
               <template v-else>
-                <span>{{ row[item.value] | arr2str }}</span>
+                <span>{{ arr2str(row[item.value]) }}</span>
               </template>
             </template>
           </gs-table-column>
         </template>
       </gs-server-table>
+</template>
     </table-page>
     <col-config
       title="配置显示列"
@@ -132,15 +137,6 @@ export default {
       deep: true
     },
   },
-  filters: {
-    arr2str(arr = '') {
-      try {
-        return JSON.parse(arr).join('，');
-      } catch (error) {
-        return arr;
-      }
-    }
-  },
   directives: {
     domains: {
       inserted(el, binding) {
@@ -155,6 +151,14 @@ export default {
     }
   },
   methods: {
+    arr2str(arr = '') {
+      try {
+        return JSON.parse(arr).join('，');
+      } catch (error) {
+        return arr;
+      }
+    },
+
     getParams() {
       const params = {
         search_condition: this.keywords,
@@ -191,7 +195,7 @@ export default {
 
     // 列配置
     saveColConfig() {
-      this.$refs.serverTable.$refs.gsmultipleTable.doLayout();
+      this.$refs.serverTable?.$refs.gsmultipleTable?.doLayout?.();
       this.renderCol = this.sortCol;
       this.saveToLocal(this.LOCAL_STORAGE_KEY, this.sortCol);
       this.colConfigVisible = false;

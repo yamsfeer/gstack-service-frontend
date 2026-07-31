@@ -47,18 +47,18 @@
           @size-change="sizeChange"
           >
           <gs-table-column prop="id" label="工单编号" width="120">
-            <template slot-scope="{ row }">
+            <template #default="{ row }">
               <gs-button type="text-primary" @click="$router.push(`/main/order/audit/${row.type}/${row.id}`)">{{ row.id }}</gs-button>
             </template>
           </gs-table-column>
           <gs-table-column prop="type" label="工单类型" width="120">
-            <template slot-scope="{ row }">
+            <template #default="{ row }">
               <span>{{ formatType(row.type) }}</span>
             </template>
           </gs-table-column>
           <gs-table-column prop="description" label="申请理由" width="200" show-overflow-tooltip />
           <gs-table-column prop="state" label="状态" width="100">
-            <template slot-scope="{ row }">
+            <template #default="{ row }">
               <gs-tag :type="formatState(row.state).color">{{ formatState(row.state).text }}</gs-tag>
               <!-- <gs-tag type="primary" v-if="row.state > 2 && row.state < 10">{{ formatState(row.state) }}</gs-tag>
               <gs-tag type="danger" v-if="row.state === 11">{{ formatState(row.state) }}</gs-tag>
@@ -70,7 +70,7 @@
           <gs-table-column prop="group" label="当前处理组" width="120" show-overflow-tooltip />
           <gs-table-column prop="create_time" label="创建时间" width="165" />
           <gs-table-column prop="create_time" label="操作" width="120" v-if="query.status === 2">
-            <template slot-scope="{ row }">
+            <template #default="{ row }">
               <gs-button type="text-primary" v-if="row.state === 1 || row.state === 2" @click="openHandleModal(row, 1)">同意</gs-button>
               <gs-button type="text-primary" v-if="row.state === 1 || row.state === 2" @click="openHandleModal(row, 2)">驳回</gs-button>
               <gs-button type="text-primary" v-if="row.state === 3" @click="$router.push(`/main/order/audit/${row.type}/${row.id}`)">开通</gs-button>

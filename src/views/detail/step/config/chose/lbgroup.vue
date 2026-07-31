@@ -31,7 +31,7 @@
       @page-change="pageChange"
       @size-change="sizeChange">
       <gs-table-column label="选择" width="40">
-        <template slot-scope="scope">
+        <template #default="scope">
           <gs-radio-group v-model="selectedLbg">
             <gs-radio :label="scope.row">&nbsp;</gs-radio>
           </gs-radio-group>
@@ -55,7 +55,7 @@
       @page-change="pageChange"
       @size-change="sizeChange">
       <gs-table-column label="选择" width="40">
-        <template slot-scope="scope">
+        <template #default="scope">
           <gs-radio-group v-model="selectedServerUuid">
             <gs-radio :label="scope.row.assetServerUuid">&nbsp;</gs-radio>
           </gs-radio-group>
@@ -67,12 +67,12 @@
     </gs-table>
     <div class="choose-tip-box" v-if="step === 1">当前选中的集群：{{selectedLbg.groupName}}</div>
     <div class="choose-tip-box" v-if="step === 2">当前选中的主负载均衡分发器：{{selectedServer.logicalHostName}}</div>
-    <div slot="footer">
+    <template #footer><div>
       <gs-button type="primary" v-if="step === 1" @click="nextStep">下一步</gs-button>
       <gs-button type="primary" v-if="step === 2" @click="step = 1">上一步</gs-button>
       <gs-button type="primary" v-if="step === 2" @click="confirm">完成</gs-button>
       <gs-button type="default" @click="close()">取消</gs-button>
-    </div>
+    </div></template>
   </gs-modal>
 </template>
 <script>

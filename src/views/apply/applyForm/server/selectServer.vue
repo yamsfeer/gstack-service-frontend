@@ -14,7 +14,9 @@
     </div>
     <div class="select-server-search">
       <div>
-        <gs-tag v-for="(value, key) in filterCondition" :key="key" v-if="!!value">{{value}}</gs-tag>
+      <template v-for="(value, key) in filterCondition" :key="key">
+        <gs-tag v-if="!!value">{{value}}</gs-tag>
+      </template>
       </div>
       <gs-input
         v-model.trim="keywords"
@@ -22,7 +24,7 @@
         icon="search"
         @keyup.enter="filterData"
       >
-        <template slot="prepend">
+        <template #prepend>
           <gs-select v-model="keywordType">
             <gs-option value="name" label="主机名"></gs-option>
             <gs-option value="ip" label="IP地址"></gs-option>
@@ -40,7 +42,7 @@
       @size-change="sizeChange"
       @selection-change="handleSelect">
       <gs-table-column label="选择" width="40" v-if="!multiple">
-        <template slot-scope="scope">
+        <template #default="scope">
           <gs-radio-group v-model="selected" @change="handleSelect">
             <gs-radio :label="scope.row" :disabled="disableSelectRadio(scope.row)">&nbsp;</gs-radio>
           </gs-radio-group>
@@ -83,11 +85,11 @@ export default {
     // 机房的筛选条件
     idcFilterCondition: {
       type: Object,
-      default: _ => {}
+      default: _ => ({})
     },
     pageFilterCondition: {
       type: Object,
-      default: _ => {}
+      default: _ => ({})
     },
     tip: {
       type: String,

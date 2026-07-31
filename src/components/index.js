@@ -20,9 +20,12 @@ const components = [
   transfer,
 ];
 
+const INSTALLED_KEY = Symbol('gs-components-installed');
+
 const install = (app, opt = {}) => {
-  if (install.installed) return;
-  install.installed = true;
+  // 按 app 实例标记，避免同一实例重复安装，同时支持多实例（测试环境）
+  if (app._context.provides[INSTALLED_KEY]) return;
+  app._context.provides[INSTALLED_KEY] = true;
   components.forEach(component => {
     if (component && component.name) {
       app.component(component.name, component);

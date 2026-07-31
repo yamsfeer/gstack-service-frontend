@@ -1,7 +1,7 @@
 <template>
   <div class="assets-cluster">
-    <table-page>
-      <filter-table slot="filter" label-width="140px" v-loading="loadingOpt">
+    <table-page><template #filter>
+      <filter-table label-width="140px" v-loading="loadingOpt">
         <filter-table-item label="机房(多选)">
           <radio-button
             :data="assetIdcListMap"
@@ -15,8 +15,8 @@
             v-model="form.typeList"
           />
         </filter-table-item>
-      </filter-table>
-      <div class="tool" slot="tool">
+      </filter-table></template>
+      <template #tool><div class="tool">
         <gs-search
           v-model="keywords"
           :input-search="debounceFetch"
@@ -27,8 +27,7 @@
           <gs-button type="primary" @click="handleCreateIp" v-if="has()">添加</gs-button>
         </div>
       </div>
-      <gs-server-table
-        slot="table"
+      </template><template #table><gs-server-table
         ref="serverTable"
         v-loading="loading"
         :table-data="tableData"
@@ -48,7 +47,7 @@
             :fixed="item.fixed"
             show-overflow-tooltip
           >
-            <template slot-scope="{ row }">
+            <template #default="{ row }">
               <template v-if="item.value === 'isUsed'">
                 <gs-switch
                   :disabled="!has()"
@@ -67,7 +66,7 @@
             </template>
           </gs-table-column>
         </template>
-      </gs-server-table>
+      </gs-server-table></template>
     </table-page>
     <col-config
       title="配置显示列"
@@ -230,7 +229,7 @@ export default {
 
     // 列配置
     saveColConfig() {
-      this.$refs.serverTable.$refs.gsmultipleTable.doLayout();
+      this.$refs.serverTable?.$refs.gsmultipleTable?.doLayout?.();
       this.renderCol = this.sortCol;
       this.saveToLocal(this.LOCAL_STORAGE_KEY, this.sortCol);
       this.colConfigVisible = false;

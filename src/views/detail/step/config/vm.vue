@@ -12,13 +12,13 @@
          <div>
            <gs-table :data="configData" class="bordered-table">
               <gs-table-column label="操作" min-width="55">
-                <template slot-scope="scope">
+                <template #default="scope">
                     <gs-button class="small-btn" @click="openLog(scope.row.task_id)" :disabled="!scope.row.task_id">日志</gs-button>
                     <gs-button class="small-btn" type="danger" :disabled="scope.row.status === 'running' || scope.row.status === 'success' || disabled" @click="delHost(scope.$index, scope.row.task_id)">删除</gs-button>
                 </template>
               </gs-table-column>
               <gs-table-column label="服务器IP" width="120">
-                <template slot-scope="scope">
+                <template #default="scope">
                     <div class="choose-box" @click="openChoose('ip', scope.$index, scope.row.ip_info.ip, scope.row.status)">
                       {{ scope.row.ip_info.ip }}
                       <i class="gs-icon-search"></i>
@@ -26,12 +26,12 @@
                 </template>
               </gs-table-column>
               <gs-table-column v-if="baseInfo.state > 3" show-overflow-tooltip label="主机名">
-                <template slot-scope="scope">
+                <template #default="scope">
                     <span>{{ scope.row.hostname || '' }}</span>
                 </template>
               </gs-table-column>
               <gs-table-column label="宿主机" width="120">
-                <template slot-scope="scope">
+                <template #default="scope">
                     <div class="choose-box" @click="openChoose('server', scope.$index, scope.row.host_machine, scope.row.status)">
                       {{ scope.row.host_machine }}
                       <i class="gs-icon-search"></i>
@@ -39,7 +39,7 @@
                 </template>
               </gs-table-column>
               <gs-table-column label="状态" width="40" class-name="center" label-class-name="center">
-                <template slot-scope="{ row }">
+                <template #default="{ row }">
                     <gs-tooltip :title="statusText[formatTaskStates(row.status)]" placement="top">
                       <span :class="['dot', 'status', formatTaskStates(row.status)]"></span>
                     </gs-tooltip>
@@ -102,11 +102,11 @@ export default {
   props: {
     baseInfo: {
       type: Object,
-      default: _ => {}
+      default: _ => ({})
     },
     handleInfo: {
       type: Object,
-      default: _ => {}
+      default: _ => ({})
     },
     isAudit: {
       type: Boolean,

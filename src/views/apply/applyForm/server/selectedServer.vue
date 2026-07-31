@@ -18,7 +18,7 @@
       <gs-table-column label="宿主机" show-overflow-tooltip prop="logicalHostMachine"></gs-table-column>
       <gs-table-column label="描述" show-overflow-tooltip prop="assetUsage"></gs-table-column>
       <gs-table-column label="操作">
-        <template slot-scope="{ row }">
+        <template #default="{ row }">
           <gs-button type="text-primary" @click="handleDel(row.assetServerUuid)">删除</gs-button>
         </template>
       </gs-table-column>
@@ -66,7 +66,8 @@ export default {
   watch: {
     value: {
       handler (val) {
-        this.originData = JSON.parse(JSON.stringify(val));
+        // 空值保护（表单初始为 undefined 时避免 JSON 解析报错）
+        this.originData = (val || []).length ? JSON.parse(JSON.stringify(val)) : [];
         this.pageSize = 10;
         this.pageNum = 1;
         this.keywords = '';

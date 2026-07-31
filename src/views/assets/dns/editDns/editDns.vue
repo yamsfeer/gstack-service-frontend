@@ -20,7 +20,7 @@
       </gs-form-item>
       <gs-form-item label="TTL：" prop="ttl">
         <gs-input v-model="form.ttl">
-          <template slot="append">second</template>
+          <template #append>second</template>
         </gs-input>
       </gs-form-item>
       <gs-form-item label="解析地址：" prop="value">
@@ -42,7 +42,7 @@ export default {
     visible: Boolean,
     editData: {
       type: Object,
-      default: _ => {}
+      default: _ => ({})
     }
   },
   watch: {

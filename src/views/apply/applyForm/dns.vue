@@ -12,7 +12,7 @@
       </gs-form-item>
       <gs-form-item label="域名：" prop="domain">
         <gs-input class="width-626" v-model="form.sub_domain" placeholder="域名，如“media”；文本长度不超过63个字符">
-          <template slot="append">
+          <template #append>
             <div class="ip-box">
               <span class="dot">.</span>
               <gs-cascader-select
@@ -44,14 +44,14 @@
           {{ip}}
         </gs-tag>
         <gs-input :class="{'margin-left-16': form.values && form.values.length > 0}" class="width-200 no-append-padding" v-model.trim="ip" placeholder="ip地址，如xx.xx.xx.xx" @keyup.enter="addIP()">
-          <template slot="append">
+          <template #append>
             <gs-button type="text" icon="plus" @click="addIP()"></gs-button>
           </template>
         </gs-input>
       </gs-form-item>
       <gs-form-item label="记录缓存时间：" prop="ttl">
         <gs-input class="width-300" v-model="form.ttl">
-          <template slot="append">seconds</template>
+          <template #append>seconds</template>
         </gs-input>
       </gs-form-item>
       <gs-form-item label="申请理由：" prop="description">
@@ -129,15 +129,16 @@ export default {
   },
   watch: {
     'form.sub_domain': {
-      handler(newVal, oldVal) {
-        this.form.domain[0] = this.form.sub_domain;
+      handler() {
+        // 整体赋值：索引赋值在 ElCascader 多次更新 modelValue 时存在竞态，导致 domain 被清空
+        this.form.domain = [this.form.sub_domain, this.form.primary_domain];
         this.$refs.form.validateField('domain');
       },
       deep: true
     },
     'form.primary_domain': {
-      handler(newVal, oldVal) {
-        this.form.domain[1] = this.form.primary_domain;
+      handler() {
+        this.form.domain = [this.form.sub_domain, this.form.primary_domain];
         this.$refs.form.validateField('domain');
       },
       deep: true

@@ -114,7 +114,9 @@ export default {
     visible(newVal) {
       if (newVal) {
         this.form = this.initForm();
-        this.$refs.form.resetFields();
+        if (this.$refs.form) {
+          this.$refs.form.resetFields();
+        }
       }
     }
   },

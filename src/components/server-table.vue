@@ -11,7 +11,7 @@
     :row-class-name="rowClassName"
     :row-style="rowStyle"
     :pagination="pagination"
-    :expand-row-keys="expandRowKeys"
+    :expand-row-keys="expandRowKeys.length ? expandRowKeys : undefined"
     @row-click="rowClick"
     @cell-click="cellClick"
     @page-change="handleCurrentChange"

@@ -31,7 +31,7 @@
           {{port}}
         </gs-tag>
         <gs-input :class="{'margin-left-16': form.port_list && form.port_list.length > 0}" class="width-150 no-append-padding" type="number" v-model="port" placeholder="添加端口" @keyup.enter="addPort()" min="1" max="65535">
-          <template slot="append">
+          <template #append>
             <gs-button type="text" icon="plus" @click="addPort()"></gs-button>
           </template>
         </gs-input>
@@ -43,13 +43,13 @@
           <gs-radio v-for="(value, index) in lvsConfig.peak" :class="{'is-checked': form.peak_prediction_in_mbps == value}" :label="value" :key="index">{{ value }}</gs-radio>
         </gs-radio-group>
         <gs-input class="width-150 margin-left-16" type="number" v-model="form.peak_prediction_in_mbps">
-          <template slot="append">mbps</template>
+          <template #append>mbps</template>
         </gs-input>
         <span class="tip">为这次申请预估一个使用带宽的峰值，我们会以此为根据为您分配贴合的资源。</span>
       </gs-form-item>
       <gs-form-item label="会话保持时间：" prop="persistent">
         <gs-input class="width-300" v-model="form.persistent">
-          <template slot="append">seconds</template>
+          <template #append>seconds</template>
         </gs-input>
         <span class="tip">推荐默认900秒，但是如果您需要连接时间较长时（如：1个小时才能返回值的API等）则需要修改该值。</span>
       </gs-form-item>
@@ -58,7 +58,7 @@
           <gs-option v-for="(item, index) in lvsConfig.lbAlgo" :key="index" :value="item.value" :label="item.label"></gs-option>
         </gs-select>
         <gs-popover trigger="hover" placement="top" width="400px">
-          <i class="gs-icon-question-circle-o" slot='reference'></i>
+          <i class="gs-icon-question-circle-o"></i>
           <span>{{lvsConfig.tip.lbAlgo}}</span>
         </gs-popover>
         <span class="tip">如果您的业务有类似带有登录的逻辑，请使用选择“源地址散列”。</span>
@@ -68,7 +68,7 @@
           <gs-option v-for="(item, index) in lvsConfig.checkMethod" :key="index" :value="item" :label="item"></gs-option>
         </gs-select>
         <gs-popover trigger="hover" placement="top" width="400px">
-          <i class="gs-icon-question-circle-o" slot='reference'></i>
+          <i class="gs-icon-question-circle-o"></i>
           <span>{{lvsConfig.tip.checkMethod}}</span>
         </gs-popover>
         <span class="tip">如果您的业务是WEB服务，请选择HTTP。</span>

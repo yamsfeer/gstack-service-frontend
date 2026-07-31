@@ -29,11 +29,11 @@ export default {
   props: {
     baseInfo: {
       type: Object,
-      default: _ => {}
+      default: _ => ({})
     },
     handleInfo: {
       type: Object,
-      default: _ => {}
+      default: _ => ({})
     },
     isAudit: {
       type: Boolean,

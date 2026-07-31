@@ -43,7 +43,12 @@ export default {
     },
     value: {
       type: Array,
-      required: true
+      default: () => []
+    },
+    // Vue 3 v-model 绑定 modelValue；未传时兼容 Vue 2 :value 语法
+    modelValue: {
+      type: Array,
+      default: undefined
     },
     visible: {
       type: Boolean,
@@ -51,9 +56,10 @@ export default {
     }
   },
   data() {
+    const val = this.modelValue !== undefined ? this.modelValue : this.value;
     const initSortCol = sortFilter(
       this.data,
-      this.value,
+      val,
       (src, sortValue) => src.value === sortValue.value
     )
       .map(item => item.value);
@@ -74,10 +80,17 @@ export default {
   watch: {
     visible(val) {
       this.modalVisible = val;
+    },
+    modelValue(val) {
+      if (val !== undefined) {
+        this.sortCol = sortFilter(this.data, val, (src, sortValue) => src.value === sortValue.value)
+          .map(item => item.value);
+      }
     }
   },
   methods: {
     confirm() {
+      this.$emit('update:modelValue', this.formatData);
       this.$emit('input', this.formatData);
       this.$emit('confirm', this.formatData);
     },

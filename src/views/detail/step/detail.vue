@@ -85,7 +85,7 @@ export default {
   props: {
     baseInfo: {
       type: Object,
-      default: _ => {}
+      default: _ => ({})
     },
     type: {
       type: [Number, String],
